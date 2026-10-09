@@ -1,0 +1,15 @@
+{
+  "source_url": "https://github.com/jtmff/torord/blob/11e463da0f083c276c0057211e476f35cc2fc2c0/cellml/ToRORd_dynCl_endo.cellml",
+  "source_revision": "11e463da0f083c276c0057211e476f35cc2fc2c0",
+  "sha256": "7105df990758667d630680cb7ec5e32e6d83e3e6655dd1fcf52864290561f11e",
+  "publication": {
+    "authors": "Tomek et al.",
+    "year": 2019,
+    "doi": "10.7554/eLife.48890"
+  },
+  "license": {
+    "status": "GPL-3.0-or-later; review deployment obligations",
+    "notes": "See upstream LICENSE.txt and cellml/LICENSE.txt."
+  },
+  "default_cell_type": "endocardial"
+}

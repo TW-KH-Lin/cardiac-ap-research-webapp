@@ -1,0 +1,15 @@
+{
+  "source_url": "https://github.com/drgrandilab/Herrera-et-al-2025-Sex-Specific-Human-Atrial-Model/tree/77c8e39b5a8ca2ea49b4ff260a63a2e9c8e7b69c/Single%20Cell",
+  "source_revision": "77c8e39b5a8ca2ea49b4ff260a63a2e9c8e7b69c",
+  "sha256": "4117f9160262a2c27be3c58cea3423b27fc369666a9896221a0d1a4c46ec36d2",
+  "publication": {
+    "authors": "Herrera et al.",
+    "year": 2025,
+    "doi": "10.1113/JP289425"
+  },
+  "license": {
+    "status": "review_required",
+    "notes": "No explicit LICENSE file is present at the pinned repository revision."
+  },
+  "default_cell_type": "male_chronic_af"
+}

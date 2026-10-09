@@ -1,0 +1,15 @@
+{
+  "source_url": "https://github.com/thomgrand/cardiomyocyte_emulator/tree/26ba43c619c0acf2fc853326aa4cd0578b786d6a",
+  "source_revision": "26ba43c619c0acf2fc853326aa4cd0578b786d6a",
+  "sha256": "6ea30b3045c733f7fff58e0dd0a74f02d8115e6f9601485f7298cb2387b4d8ac",
+  "publication": {
+    "authors": "Grandits et al.",
+    "year": 2024,
+    "doi": null
+  },
+  "license": {
+    "status": "AGPL-3.0; deployment review_required",
+    "notes": "Network-service source obligations may apply."
+  },
+  "default_cell_type": "ventricular_emulator"
+}

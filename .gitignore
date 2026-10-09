@@ -1,0 +1,17 @@
+.venv/
+.build/
+.local/
+.runtime/
+.pnpm-store/
+**/__pycache__/
+*.pyc
+frontend/node_modules/
+frontend/dist/
+frontend/tsconfig.tsbuildinfo
+.pytest_cache/
+external/
+model_assets/
+backend/app/backends/simone_static_rhs.py
+cardiac-ap-site/
+cardiac_codex_starter/
+.DS_Store

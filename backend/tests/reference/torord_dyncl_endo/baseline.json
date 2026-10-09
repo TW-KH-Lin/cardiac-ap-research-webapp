@@ -1,0 +1,58 @@
+{
+  "model_id": "torord_dyncl_endo",
+  "source_sha256": "7105df990758667d630680cb7ec5e32e6d83e3e6655dd1fcf52864290561f11e",
+  "request": {
+    "model_id": "torord_dyncl_endo",
+    "duration_ms": 1000.0,
+    "pacing": null,
+    "prepace_beats": 50,
+    "parameters": {},
+    "include_currents": [
+      "INa",
+      "IKr",
+      "ICaL"
+    ],
+    "auto_rescue": false
+  },
+  "settings_actual": {
+    "pacing": {
+      "mode": "external",
+      "frequency_hz": 1.0,
+      "stimulus_duration_ms": 1.0,
+      "stimulus_strength_nA": 2.65,
+      "offset_ms": 200.0,
+      "cm_pf": 50.0
+    },
+    "prepace_beats": 50,
+    "native_stimulus_level": -53.0,
+    "native_stimulus_unit": "A/F",
+    "rescued": false,
+    "parameter_values": {}
+  },
+  "voltage_min_mv": -89.74726901962082,
+  "voltage_max_mv": 33.11770260429312,
+  "selected_metrics": {
+    "valid": true,
+    "upstroke_time_ms": 200.8,
+    "resting_mv": -89.7461117371055,
+    "peak_mv": 33.11770260429312,
+    "amplitude_mv": 122.86381434139861,
+    "dvdt_max_mv_per_ms": 235.1869090756207,
+    "apd30_ms": 166.1658843425875,
+    "apd50_ms": 219.8000377715867,
+    "apd80_ms": 262.35405031687543,
+    "apd90_ms": 272.513243665826,
+    "triangulation_ms": 106.34735932323849,
+    "ead_flag": false
+  },
+  "current_peak_abs": {
+    "INa": 13523.013343759725,
+    "IKr": 50.598930710202424,
+    "ICaL": 250.8908432449955
+  },
+  "tolerances": {
+    "trace_rmse_mv": 3.0,
+    "metric_relative": 0.1,
+    "current_peak_relative": 0.2
+  }
+}

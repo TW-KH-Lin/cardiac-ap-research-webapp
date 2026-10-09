@@ -1,0 +1,58 @@
+{
+  "model_id": "grandi_2011",
+  "source_sha256": "5a772131b12f6b412e34094f33a988259a508bae2d8fa2736cf362c4d40ea0bf",
+  "request": {
+    "model_id": "grandi_2011",
+    "duration_ms": 1000.0,
+    "pacing": null,
+    "prepace_beats": 50,
+    "parameters": {},
+    "include_currents": [
+      "INa",
+      "IKr",
+      "ICaL"
+    ],
+    "auto_rescue": false
+  },
+  "settings_actual": {
+    "pacing": {
+      "mode": "external",
+      "frequency_hz": 1.0,
+      "stimulus_duration_ms": 1.0,
+      "stimulus_strength_nA": 1.875,
+      "offset_ms": 200.0,
+      "cm_pf": 50.0
+    },
+    "prepace_beats": 50,
+    "native_stimulus_level": -37.5,
+    "native_stimulus_unit": "A/F",
+    "rescued": false,
+    "parameter_values": {}
+  },
+  "voltage_min_mv": -73.54518183525283,
+  "voltage_max_mv": 8.813087477249354,
+  "selected_metrics": {
+    "valid": true,
+    "upstroke_time_ms": 200.8,
+    "resting_mv": -73.53776016979434,
+    "peak_mv": 8.813087477249354,
+    "amplitude_mv": 82.3508476470437,
+    "dvdt_max_mv_per_ms": 108.98071628849323,
+    "apd30_ms": 42.54039532493107,
+    "apd50_ms": 122.4382367736768,
+    "apd80_ms": 260.8786431236042,
+    "apd90_ms": 326.506937292166,
+    "triangulation_ms": 283.96654196723495,
+    "ead_flag": false
+  },
+  "current_peak_abs": {
+    "INa": 5103.960883635726,
+    "IKr": 0.6020443927500828,
+    "ICaL": 394.23537475869585
+  },
+  "tolerances": {
+    "trace_rmse_mv": 3.0,
+    "metric_relative": 0.1,
+    "current_peak_relative": 0.2
+  }
+}

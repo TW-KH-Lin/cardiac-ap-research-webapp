@@ -1,0 +1,19 @@
+[project]
+name = "cardiac-ap-webapp-backend"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi==0.142.4",
+  "uvicorn==0.54.0",
+  "myokit==1.39.2",
+  "numpy==2.5.3",
+  "scipy==1.18.1",
+  "pandas==3.0.6",
+  "torch==2.14.1",
+]
+
+[project.optional-dependencies]
+test = ["pytest==9.1.1", "httpx==0.28.1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

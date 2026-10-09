@@ -1,0 +1,15 @@
+{
+  "source_url": "https://github.com/drgrandilab/Ni-et-al-2023-Human-Atrial-Signaling-Model/tree/683d1dab564b7a427ec301126924c94e8bf5ecb2/Single_Cells",
+  "source_revision": "683d1dab564b7a427ec301126924c94e8bf5ecb2",
+  "sha256": "c7e3bd5f686a560876955007501d1e5114dd9d41772386dce22282ae2bdf964c",
+  "publication": {
+    "authors": "Ni, Morotti, Zhang, Dobrev, and Grandi",
+    "year": 2023,
+    "doi": "10.1093/cvr/cvad118"
+  },
+  "license": {
+    "status": "review_required",
+    "notes": "No explicit LICENSE file is present at the pinned repository revision. Local research execution is enabled; redistribution requires review."
+  },
+  "default_cell_type": "human_atrial_nsr"
+}

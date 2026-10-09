@@ -1,0 +1,10 @@
+{
+  "reference_runtime": "GNU Octave 10.3.0 ode15s",
+  "source_file": "model_assets/ventricular/simone/Simone_Trancuccio2025.m",
+  "source_sha256": "eed735631c09fef2de2ed3315de4c72e615dc39ecebe0a73cd440e00272105d0",
+  "rtol": 1e-08,
+  "atol": 1e-10,
+  "max_step_s": 0.005,
+  "voltage_rmse_tolerance_mv": 0.001,
+  "voltage_max_abs_tolerance_mv": 0.01
+}

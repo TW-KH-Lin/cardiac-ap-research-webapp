@@ -1,0 +1,15 @@
+{
+  "source_url": "https://github.com/myokit/models/blob/e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d/c/fabbri-2017.mmt",
+  "source_revision": "e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d",
+  "sha256": "077a2965e48bc10f6d7f7a99d29ea748f339495dada6881dce442ed7858a3806",
+  "publication": {
+    "authors": "Fabbri et al.",
+    "year": 2017,
+    "doi": "10.1113/JP273259"
+  },
+  "license": {
+    "status": "CC-BY-3.0 (PMR exposure); curated implementation review_required",
+    "notes": "Myokit model documents derivative comparison and unit corrections."
+  },
+  "default_cell_type": "sinoatrial_node"
+}

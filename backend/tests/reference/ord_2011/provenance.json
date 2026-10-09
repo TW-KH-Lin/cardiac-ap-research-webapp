@@ -1,0 +1,15 @@
+{
+  "source_url": "https://github.com/myokit/models/blob/e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d/c/ohara-2011.mmt",
+  "source_revision": "e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d",
+  "sha256": "0ba58e14b76714741b3125d638eb03806c1be48eadb56c578cc821c141344c27",
+  "publication": {
+    "authors": "O'Hara et al.",
+    "year": 2011,
+    "doi": "10.1371/journal.pcbi.1002061"
+  },
+  "license": {
+    "status": "review_required",
+    "notes": "Curated model metadata and upstream repository terms require review."
+  },
+  "default_cell_type": "ventricular"
+}

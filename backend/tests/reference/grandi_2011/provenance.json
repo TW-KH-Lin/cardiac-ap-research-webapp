@@ -1,0 +1,15 @@
+{
+  "source_url": "https://github.com/myokit/models/blob/e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d/c/grandi-2011.mmt",
+  "source_revision": "e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d",
+  "sha256": "5a772131b12f6b412e34094f33a988259a508bae2d8fa2736cf362c4d40ea0bf",
+  "publication": {
+    "authors": "Grandi et al.",
+    "year": 2011,
+    "doi": null
+  },
+  "license": {
+    "status": "review_required",
+    "notes": "Review exact model terms before redistribution."
+  },
+  "default_cell_type": "atrial"
+}

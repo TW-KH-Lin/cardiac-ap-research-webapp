@@ -1,0 +1,949 @@
+{
+  "schema_version": 1,
+  "models": [
+    {
+      "id": "torord_dyncl_endo",
+      "display_name": "ToR-ORd-dynCl Endocardial",
+      "category": "ventricular",
+      "developmental_stage": "adult",
+      "backend": "myokit",
+      "source_file": "external/torord/cellml/ToRORd_dynCl_endo.cellml",
+      "source_url": "https://github.com/jtmff/torord/blob/11e463da0f083c276c0057211e476f35cc2fc2c0/cellml/ToRORd_dynCl_endo.cellml",
+      "source_revision": "11e463da0f083c276c0057211e476f35cc2fc2c0",
+      "publication": {
+        "authors": "Tomek et al.",
+        "year": 2019,
+        "doi": "10.7554/eLife.48890"
+      },
+      "license": {
+        "status": "GPL-3.0-or-later; review deployment obligations",
+        "notes": "See upstream LICENSE.txt and cellml/LICENSE.txt."
+      },
+      "status": "enabled",
+      "default_cell_type": "endocardial",
+      "default_pacing": {
+        "mode": "external",
+        "frequency_hz": 1.0,
+        "stimulus_duration_ms": 1.0,
+        "stimulus_strength_nA": 2.65,
+        "offset_ms": 200.0,
+        "cm_pf": 50.0
+      },
+      "parameters": {
+        "g_Na": "INa.GNa",
+        "g_NaL": "INaL.GNaL_b",
+        "g_to": "Ito.Gto_b",
+        "g_Kr": "IKr.GKr_b",
+        "g_Ks": "IKs.GKs_b",
+        "g_K1": "IK1.GK1_b",
+        "g_NaCa": "INaCa.Gncx_b",
+        "g_NaK": "INaK.Pnak_b",
+        "g_CaL": "ICaL.PCa_b"
+      },
+      "currents": {
+        "INa": "INa.INa",
+        "INaL": "INaL.INaL",
+        "Ito": "Ito.Ito",
+        "IKr": "IKr.IKr",
+        "IKs": "IKs.IKs",
+        "IK1": "IK1.IK1",
+        "INaK": "INaK.INaK",
+        "ICaL": "ICaL.ICaL",
+        "INaCa_i": "INaCa.INaCa_i",
+        "INaCa_ss": "INaCa.INaCa_ss"
+      },
+      "voltage": "membrane.v",
+      "calcium": "intracellular_ions.cai",
+      "sha256": "7105df990758667d630680cb7ec5e32e6d83e3e6655dd1fcf52864290561f11e",
+      "download_date": "2026-10-08"
+    },
+    {
+      "id": "bps2020",
+      "display_name": "BPS2020 Ventricular",
+      "category": "ventricular",
+      "developmental_stage": "adult",
+      "backend": "myokit",
+      "source_file": "model_assets/ventricular/BPS2020.cellml",
+      "source_url": "https://models.cellml.org/workspace/711/rawfile/c8dc3b237a23e43c99a5d4a768313d5c6bc3ce18/BPS2020.cellml",
+      "source_revision": "c8dc3b237a23e43c99a5d4a768313d5c6bc3ce18",
+      "publication": {
+        "authors": "Bartolucci et al.",
+        "year": 2020,
+        "doi": null
+      },
+      "license": {
+        "status": "review_required",
+        "notes": "Model-specific terms are not stated by the PMR workspace; local research execution is enabled, while redistribution requires review."
+      },
+      "status": "enabled",
+      "default_cell_type": "ventricular",
+      "default_extracellular_calcium_mm": 1.7,
+      "default_options": {
+        "extracellular_calcium_mm": 1.7
+      },
+      "model_options": {
+        "extracellular_calcium_mm": {
+          "label": "Extracellular Ca²⁺",
+          "unit": "mM",
+          "min": 0.6,
+          "max": 3.0,
+          "step": 0.1
+        }
+      },
+      "model_option_variables": {
+        "extracellular_calcium_mm": "extracellular.cao"
+      },
+      "default_pacing": {
+        "mode": "external",
+        "frequency_hz": 1.0,
+        "stimulus_duration_ms": 1.0,
+        "stimulus_strength_nA": 1.1,
+        "offset_ms": 200.0,
+        "cm_pf": 50.0
+      },
+      "parameters": {
+        "g_Na": "INa.GNa",
+        "g_NaL": "INaL.GNaL_b",
+        "g_to": "Ito.Gto_b",
+        "g_Kr": "IKr.GKr_b",
+        "g_Ks": "IKs.GKs_b",
+        "g_K1": "IK1.GK1_b",
+        "g_NaCa": "INaCa_i.Gncx_b",
+        "g_NaK": "INaK.Pnak_b",
+        "g_CaL": "ICaL.PCa_b"
+      },
+      "currents": {
+        "INa": "INa.INa",
+        "INaL": "INaL.INaL",
+        "Ito": "Ito.Ito",
+        "IKr": "IKr.IKr",
+        "IKs": "IKs.IKs",
+        "IK1": "IK1.IK1",
+        "INaK": "INaK.INaK",
+        "ICaL": "ICaL.ICaL",
+        "INaCa_i": "INaCa_i.INaCa_i",
+        "INaCa_ss": "INaCa_i.INaCa_ss"
+      },
+      "stimulus_variable": "membrane.Istim",
+      "voltage": "membrane.v",
+      "calcium": "intracellular_ions.cai",
+      "sha256": "04ddd950a145323ccb15830175b1adca1563eaf7f2a8763bdbd68ed1ce8eeb18",
+      "download_date": "2026-10-09"
+    },
+    {
+      "id": "ord_2011",
+      "display_name": "O'Hara-Rudy 2011 Ventricular",
+      "category": "ventricular",
+      "developmental_stage": "adult",
+      "backend": "myokit",
+      "source_file": "external/myokit-models/c/ohara-2011.mmt",
+      "source_url": "https://github.com/myokit/models/blob/e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d/c/ohara-2011.mmt",
+      "source_revision": "e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d",
+      "publication": {
+        "authors": "O'Hara et al.",
+        "year": 2011,
+        "doi": "10.1371/journal.pcbi.1002061"
+      },
+      "license": {
+        "status": "review_required",
+        "notes": "Curated model metadata and upstream repository terms require review."
+      },
+      "status": "enabled",
+      "default_cell_type": "ventricular",
+      "default_pacing": {
+        "mode": "external",
+        "frequency_hz": 1.0,
+        "stimulus_duration_ms": 0.5,
+        "stimulus_strength_nA": 5.8,
+        "offset_ms": 200.0,
+        "cm_pf": 50.0
+      },
+      "parameters": {
+        "g_Na": "ina.gNa",
+        "g_NaL": "inal.gNaL",
+        "g_to": "ito.gto",
+        "g_Kr": "ikr.gKr",
+        "g_Ks": "iks.gKs",
+        "g_K1": "ik1.gK1",
+        "g_CaL": "ical.PCa_base"
+      },
+      "currents": {
+        "INa": "ina.INa",
+        "INaL": "inal.INaL",
+        "Ito": "ito.Ito",
+        "IKr": "ikr.IKr",
+        "IKs": "iks.IKs",
+        "IK1": "ik1.IK1",
+        "ICaL": "ical.ICaL_tot"
+      },
+      "voltage": "membrane.V",
+      "calcium": "calcium.Ca_i",
+      "sha256": "0ba58e14b76714741b3125d638eb03806c1be48eadb56c578cc821c141344c27",
+      "download_date": "2026-10-08"
+    },
+    {
+      "id": "grandi_2011",
+      "display_name": "Grandi 2011 Atrial",
+      "category": "atrial",
+      "developmental_stage": "adult",
+      "backend": "myokit",
+      "source_file": "external/myokit-models/c/grandi-2011.mmt",
+      "source_url": "https://github.com/myokit/models/blob/e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d/c/grandi-2011.mmt",
+      "source_revision": "e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d",
+      "publication": {
+        "authors": "Grandi et al.",
+        "year": 2011,
+        "doi": null
+      },
+      "license": {
+        "status": "review_required",
+        "notes": "Review exact model terms before redistribution."
+      },
+      "status": "enabled",
+      "default_cell_type": "atrial",
+      "default_pacing": {
+        "mode": "external",
+        "frequency_hz": 1.0,
+        "stimulus_duration_ms": 1.0,
+        "stimulus_strength_nA": 1.875,
+        "offset_ms": 200.0,
+        "cm_pf": 50.0
+      },
+      "parameters": {
+        "g_Na": "ina.gNa_base",
+        "g_NaL": "inal.gNaL_base",
+        "g_to": "ito.gto_base",
+        "g_Kr": "ikr.gKr",
+        "g_Ks": "iks.gKs_base",
+        "g_K1": "ik1.gK1_base",
+        "g_CaL": "ical.scale"
+      },
+      "currents": {
+        "INa": "ina.INa",
+        "INaL": "inal.INaL",
+        "Ito": "ito.Ito",
+        "IKr": "ikr.IKr",
+        "IKs": "iks.IKs",
+        "IK1": "ik1.IK1",
+        "ICaL": "ical.ICaL"
+      },
+      "voltage": "membrane.V",
+      "calcium": "calcium.Ca_i",
+      "sha256": "5a772131b12f6b412e34094f33a988259a508bae2d8fa2736cf362c4d40ea0bf",
+      "download_date": "2026-10-08"
+    },
+    {
+      "id": "ni_2023_atrial",
+      "display_name": "Ni–Morotti–Grandi 2023 Human Atrial Signaling",
+      "category": "atrial",
+      "developmental_stage": "adult",
+      "backend": "external_compiled",
+      "source_file": "external/ni_2023_atrial/Single_Cells/main_HAM_Signalling_cvode_new.cpp",
+      "runtime_file": "model_assets/atrial/ni_2023/ni_single_cell",
+      "initial_conditions_file": "external/ni_2023_atrial/Single_Cells/Restart_ICs/ICs_baseline.bin",
+      "initial_conditions_sha256": "67bd85affb231580c6d75cc4903df78cf7df521ea07a122f08daf16e21644651",
+      "source_url": "https://github.com/drgrandilab/Ni-et-al-2023-Human-Atrial-Signaling-Model/tree/683d1dab564b7a427ec301126924c94e8bf5ecb2/Single_Cells",
+      "source_revision": "683d1dab564b7a427ec301126924c94e8bf5ecb2",
+      "publication": {
+        "authors": "Ni, Morotti, Zhang, Dobrev, and Grandi",
+        "year": 2023,
+        "doi": "10.1093/cvr/cvad118"
+      },
+      "license": {
+        "status": "review_required",
+        "notes": "No explicit LICENSE file is present at the pinned repository revision. Local research execution is enabled; redistribution requires review."
+      },
+      "status": "enabled",
+      "default_cell_type": "human_atrial_nsr",
+      "default_pacing": {
+        "mode": "external",
+        "frequency_hz": 1.0,
+        "stimulus_duration_ms": 5.0,
+        "stimulus_strength_nA": 1.375,
+        "offset_ms": 0.0,
+        "cm_pf": 110.0
+      },
+      "default_options": {
+        "af_state": 0,
+        "iso_nm": 0,
+        "camkii_inhibition": 0,
+        "camkii_double": 0
+      },
+      "model_options": {
+        "af_state": {
+          "label": "Atrial state (0 nSR, 1 AF)",
+          "unit": "0/1",
+          "min": 0,
+          "max": 1,
+          "step": 1
+        },
+        "iso_nm": {
+          "label": "Isoprenaline / ISO",
+          "unit": "nM",
+          "min": 0,
+          "max": 1000,
+          "step": 10
+        },
+        "camkii_inhibition": {
+          "label": "CaMKII inhibition (0/1)",
+          "unit": "0/1",
+          "min": 0,
+          "max": 1,
+          "step": 1
+        },
+        "camkii_double": {
+          "label": "CaMKII expression doubled (0/1)",
+          "unit": "0/1",
+          "min": 0,
+          "max": 1,
+          "step": 1
+        }
+      },
+      "parameters": {
+        "g_Na": "cell_para.INa_Scale",
+        "g_NaL": "cell_para.INaL_Scale",
+        "g_to": "cell_para.Itof_Scale",
+        "g_Kur": "cell_para.IKur_Scale",
+        "g_K2P": "cell_para.IK2p_Scale",
+        "g_Kr": "cell_para.IKr_Scale",
+        "g_Ks": "cell_para.IKs_Scale",
+        "g_K1": "cell_para.IK1_Scale",
+        "g_SK": "cell_para.ISK_Scale",
+        "g_CaL": "cell_para.ICaL_Scale",
+        "g_NaK": "cell_para.INaK_Scale",
+        "g_NaCa": "cell_para.INCX_Scale"
+      },
+      "currents": {
+        "INa": "INa",
+        "INaL": "INaL",
+        "Ito": "Ito",
+        "IKur": "IKur",
+        "IK2P": "IK2P",
+        "IKr": "IKr",
+        "IKs": "IKs",
+        "IK1": "IK1",
+        "ISK": "ISK",
+        "ICaL": "ICaL",
+        "INaK": "INaK",
+        "INaCa": "INaCa"
+      },
+      "voltage": "V",
+      "calcium": "Cai",
+      "sha256": "c7e3bd5f686a560876955007501d1e5114dd9d41772386dce22282ae2bdf964c",
+      "download_date": "2026-10-09"
+    },
+    {
+      "id": "herrera_2025_male_nsr",
+      "display_name": "Herrera 2025 Male / Normal Sinus Rhythm",
+      "category": "atrial",
+      "developmental_stage": "adult",
+      "backend": "herrera_octave",
+      "source_file": "external/herrera_2025_atrial/Single Cell/NH_ODE.m",
+      "initial_conditions_file": "external/herrera_2025_atrial/Single Cell/yfin_nSR_1Hz_0_ISO_male.mat",
+      "initial_conditions_sha256": "67c49f3701fc77bb81532f1c11be54b153d92e8f8ba8c255ce089b3b1befb30a",
+      "source_url": "https://github.com/drgrandilab/Herrera-et-al-2025-Sex-Specific-Human-Atrial-Model/tree/77c8e39b5a8ca2ea49b4ff260a63a2e9c8e7b69c/Single%20Cell",
+      "source_revision": "77c8e39b5a8ca2ea49b4ff260a63a2e9c8e7b69c",
+      "publication": {
+        "authors": "Herrera et al.",
+        "year": 2025,
+        "doi": "10.1113/JP289425"
+      },
+      "license": {
+        "status": "review_required",
+        "notes": "No explicit LICENSE file is present at the pinned repository revision."
+      },
+      "status": "enabled",
+      "default_cell_type": "male_normal_sinus_rhythm",
+      "default_pacing": {
+        "mode": "external",
+        "frequency_hz": 1.0,
+        "stimulus_duration_ms": 5.0,
+        "stimulus_strength_nA": 1.375,
+        "offset_ms": 0.0,
+        "cm_pf": 110.0
+      },
+      "parameters": {
+        "g_Na": "INa_Scale",
+        "g_NaL": "INaL_Scale",
+        "g_to": "Itof_Scale",
+        "g_Kur": "IKur_Scale",
+        "g_K2P": "IK2p_Scale",
+        "g_Kr": "IKr_Scale",
+        "g_Ks": "IKs_Scale",
+        "g_K1": "IK1_Scale",
+        "g_KACh": "IKach_Scale",
+        "g_SK": "ISK_Scale",
+        "g_CaL": "ICaL_Scale",
+        "g_NaK": "INaK_Scale",
+        "g_NaCa": "INCX_Scale",
+        "sr_buffer": "CSQ_B_max_Scale"
+      },
+      "currents": {},
+      "voltage": "y(39)",
+      "calcium": "y(38)",
+      "sha256": "4117f9160262a2c27be3c58cea3423b27fc369666a9896221a0d1a4c46ec36d2",
+      "download_date": "2026-10-09",
+      "runtime_file": "backend/native/herrera_2025/run_herrera.m",
+      "runtime_sha256": "fcc48f15ac96c81b7797b619d0803976a6bb23cc59ee56cb7361757443df0725",
+      "model_options": {
+        "iso_nm": {
+          "label": "Isoprenaline / ISO",
+          "unit": "nM",
+          "min": 0,
+          "max": 1000,
+          "step": 10
+        }
+      },
+      "default_options": {
+        "iso_nm": 0
+      },
+      "female": 0,
+      "af_state": 0
+    },
+    {
+      "id": "herrera_2025_female_nsr",
+      "display_name": "Herrera 2025 Female / Normal Sinus Rhythm",
+      "category": "atrial",
+      "developmental_stage": "adult",
+      "backend": "herrera_octave",
+      "source_file": "external/herrera_2025_atrial/Single Cell/NH_ODE.m",
+      "initial_conditions_file": "external/herrera_2025_atrial/Single Cell/yfin_nSR_1Hz_0_ISO_female.mat",
+      "initial_conditions_sha256": "c49ab51d825c0945e16cf117abad0cafaecddac84b6ba490f8fc5c4196d13e9b",
+      "source_url": "https://github.com/drgrandilab/Herrera-et-al-2025-Sex-Specific-Human-Atrial-Model/tree/77c8e39b5a8ca2ea49b4ff260a63a2e9c8e7b69c/Single%20Cell",
+      "source_revision": "77c8e39b5a8ca2ea49b4ff260a63a2e9c8e7b69c",
+      "publication": {
+        "authors": "Herrera et al.",
+        "year": 2025,
+        "doi": "10.1113/JP289425"
+      },
+      "license": {
+        "status": "review_required",
+        "notes": "No explicit LICENSE file is present at the pinned repository revision."
+      },
+      "status": "enabled",
+      "default_cell_type": "female_normal_sinus_rhythm",
+      "default_pacing": {
+        "mode": "external",
+        "frequency_hz": 1.0,
+        "stimulus_duration_ms": 5.0,
+        "stimulus_strength_nA": 1.375,
+        "offset_ms": 0.0,
+        "cm_pf": 110.0
+      },
+      "parameters": {
+        "g_Na": "INa_Scale",
+        "g_NaL": "INaL_Scale",
+        "g_to": "Itof_Scale",
+        "g_Kur": "IKur_Scale",
+        "g_K2P": "IK2p_Scale",
+        "g_Kr": "IKr_Scale",
+        "g_Ks": "IKs_Scale",
+        "g_K1": "IK1_Scale",
+        "g_KACh": "IKach_Scale",
+        "g_SK": "ISK_Scale",
+        "g_CaL": "ICaL_Scale",
+        "g_NaK": "INaK_Scale",
+        "g_NaCa": "INCX_Scale",
+        "sr_buffer": "CSQ_B_max_Scale"
+      },
+      "currents": {},
+      "voltage": "y(39)",
+      "calcium": "y(38)",
+      "sha256": "4117f9160262a2c27be3c58cea3423b27fc369666a9896221a0d1a4c46ec36d2",
+      "download_date": "2026-10-09",
+      "runtime_file": "backend/native/herrera_2025/run_herrera.m",
+      "runtime_sha256": "fcc48f15ac96c81b7797b619d0803976a6bb23cc59ee56cb7361757443df0725",
+      "model_options": {
+        "iso_nm": {
+          "label": "Isoprenaline / ISO",
+          "unit": "nM",
+          "min": 0,
+          "max": 1000,
+          "step": 10
+        }
+      },
+      "default_options": {
+        "iso_nm": 0
+      },
+      "female": 1,
+      "af_state": 0
+    },
+    {
+      "id": "herrera_2025_male_caf",
+      "display_name": "Herrera 2025 Male / Chronic AF",
+      "category": "atrial",
+      "developmental_stage": "adult",
+      "backend": "herrera_octave",
+      "source_file": "external/herrera_2025_atrial/Single Cell/NH_ODE.m",
+      "initial_conditions_file": "external/herrera_2025_atrial/Single Cell/yfin_cAF_1Hz_0_ISO_male.mat",
+      "initial_conditions_sha256": "fac2bd6a675cb18f596ae47ed3219b1c77506d9ba6d773feb53d00c7d823d64f",
+      "source_url": "https://github.com/drgrandilab/Herrera-et-al-2025-Sex-Specific-Human-Atrial-Model/tree/77c8e39b5a8ca2ea49b4ff260a63a2e9c8e7b69c/Single%20Cell",
+      "source_revision": "77c8e39b5a8ca2ea49b4ff260a63a2e9c8e7b69c",
+      "publication": {
+        "authors": "Herrera et al.",
+        "year": 2025,
+        "doi": "10.1113/JP289425"
+      },
+      "license": {
+        "status": "review_required",
+        "notes": "No explicit LICENSE file is present at the pinned repository revision."
+      },
+      "status": "enabled",
+      "default_cell_type": "male_chronic_af",
+      "default_pacing": {
+        "mode": "external",
+        "frequency_hz": 1.0,
+        "stimulus_duration_ms": 5.0,
+        "stimulus_strength_nA": 1.375,
+        "offset_ms": 0.0,
+        "cm_pf": 110.0
+      },
+      "parameters": {
+        "g_Na": "INa_Scale",
+        "g_NaL": "INaL_Scale",
+        "g_to": "Itof_Scale",
+        "g_Kur": "IKur_Scale",
+        "g_K2P": "IK2p_Scale",
+        "g_Kr": "IKr_Scale",
+        "g_Ks": "IKs_Scale",
+        "g_K1": "IK1_Scale",
+        "g_KACh": "IKach_Scale",
+        "g_SK": "ISK_Scale",
+        "g_CaL": "ICaL_Scale",
+        "g_NaK": "INaK_Scale",
+        "g_NaCa": "INCX_Scale",
+        "sr_buffer": "CSQ_B_max_Scale"
+      },
+      "currents": {},
+      "voltage": "y(39)",
+      "calcium": "y(38)",
+      "sha256": "4117f9160262a2c27be3c58cea3423b27fc369666a9896221a0d1a4c46ec36d2",
+      "download_date": "2026-10-09",
+      "runtime_file": "backend/native/herrera_2025/run_herrera.m",
+      "runtime_sha256": "fcc48f15ac96c81b7797b619d0803976a6bb23cc59ee56cb7361757443df0725",
+      "model_options": {
+        "iso_nm": {
+          "label": "Isoprenaline / ISO",
+          "unit": "nM",
+          "min": 0,
+          "max": 1000,
+          "step": 10
+        }
+      },
+      "default_options": {
+        "iso_nm": 0
+      },
+      "female": 0,
+      "af_state": 1
+    },
+    {
+      "id": "herrera_2025_female_caf",
+      "display_name": "Herrera 2025 Female / Chronic AF",
+      "category": "atrial",
+      "developmental_stage": "adult",
+      "backend": "herrera_octave",
+      "source_file": "external/herrera_2025_atrial/Single Cell/NH_ODE.m",
+      "initial_conditions_file": "external/herrera_2025_atrial/Single Cell/yfin_cAF_1Hz_0_ISO_female.mat",
+      "initial_conditions_sha256": "9024eaa32c914e98a00a1f87a794b184cc8d5eb3ae0bb917631ce6570fb02ed8",
+      "source_url": "https://github.com/drgrandilab/Herrera-et-al-2025-Sex-Specific-Human-Atrial-Model/tree/77c8e39b5a8ca2ea49b4ff260a63a2e9c8e7b69c/Single%20Cell",
+      "source_revision": "77c8e39b5a8ca2ea49b4ff260a63a2e9c8e7b69c",
+      "publication": {
+        "authors": "Herrera et al.",
+        "year": 2025,
+        "doi": "10.1113/JP289425"
+      },
+      "license": {
+        "status": "review_required",
+        "notes": "No explicit LICENSE file is present at the pinned repository revision."
+      },
+      "status": "enabled",
+      "default_cell_type": "female_chronic_af",
+      "default_pacing": {
+        "mode": "external",
+        "frequency_hz": 1.0,
+        "stimulus_duration_ms": 5.0,
+        "stimulus_strength_nA": 1.375,
+        "offset_ms": 0.0,
+        "cm_pf": 110.0
+      },
+      "parameters": {
+        "g_Na": "INa_Scale",
+        "g_NaL": "INaL_Scale",
+        "g_to": "Itof_Scale",
+        "g_Kur": "IKur_Scale",
+        "g_K2P": "IK2p_Scale",
+        "g_Kr": "IKr_Scale",
+        "g_Ks": "IKs_Scale",
+        "g_K1": "IK1_Scale",
+        "g_KACh": "IKach_Scale",
+        "g_SK": "ISK_Scale",
+        "g_CaL": "ICaL_Scale",
+        "g_NaK": "INaK_Scale",
+        "g_NaCa": "INCX_Scale",
+        "sr_buffer": "CSQ_B_max_Scale"
+      },
+      "currents": {},
+      "voltage": "y(39)",
+      "calcium": "y(38)",
+      "sha256": "4117f9160262a2c27be3c58cea3423b27fc369666a9896221a0d1a4c46ec36d2",
+      "download_date": "2026-10-09",
+      "runtime_file": "backend/native/herrera_2025/run_herrera.m",
+      "runtime_sha256": "fcc48f15ac96c81b7797b619d0803976a6bb23cc59ee56cb7361757443df0725",
+      "model_options": {
+        "iso_nm": {
+          "label": "Isoprenaline / ISO",
+          "unit": "nM",
+          "min": 0,
+          "max": 1000,
+          "step": 10
+        }
+      },
+      "default_options": {
+        "iso_nm": 0
+      },
+      "female": 1,
+      "af_state": 1
+    },
+    {
+      "id": "linder_fabbri_2025",
+      "display_name": "Linder–Fabbri 2025 Human SAN + β-Adrenergic Signaling",
+      "category": "pacemaker",
+      "developmental_stage": "adult",
+      "backend": "myokit",
+      "source_file": "model_assets/pacemaker/linder_fabbri_2025_betaAR/HumanSAN_Fabbri_Fantini_Wilders_Severi_2017.cellml",
+      "runtime_file": "model_assets/pacemaker/linder_fabbri_2025_betaAR/HumanSAN_Fabbri_Fantini_Wilders_Severi_2017.myokit.cellml",
+      "source_url": "https://models.cellml.org/workspace/c65/rawfile/95db8d627beef8d27783ae6fa2381a2fb47b123a/HumanSAN_Fabbri_Fantini_Wilders_Severi_2017.cellml",
+      "source_revision": "95db8d627beef8d27783ae6fa2381a2fb47b123a",
+      "exposure": "https://models.physiomeproject.org/e/d14",
+      "publication": {
+        "authors": "Linder et al.",
+        "year": 2025,
+        "doi": "10.1113/JP287557"
+      },
+      "license": {
+        "status": "CC-BY-3.0",
+        "notes": "License shown by the published PMR exposure d14."
+      },
+      "status": "enabled",
+      "default_cell_type": "sinoatrial_node_beta_adrenergic",
+      "default_pacing": {
+        "mode": "spontaneous",
+        "frequency_hz": 0,
+        "stimulus_duration_ms": 0,
+        "stimulus_strength_nA": 0,
+        "offset_ms": 0,
+        "cm_pf": 50.0
+      },
+      "default_options": {
+        "extracellular_calcium_mm": 1.8,
+        "iso_nm": 0
+      },
+      "model_options": {
+        "extracellular_calcium_mm": {
+          "label": "Extracellular Ca²⁺",
+          "unit": "mM",
+          "min": 0.6,
+          "max": 1.8,
+          "step": 0.1
+        },
+        "iso_nm": {
+          "label": "Isoprenaline / ISO",
+          "unit": "nM",
+          "min": 0,
+          "max": 1000,
+          "step": 10
+        }
+      },
+      "model_option_variables": {
+        "extracellular_calcium_mm": "Ionic_values.Cao",
+        "iso_nm": "Rate_modulation_experiments.Iso_cas"
+      },
+      "model_option_activation_variables": {
+        "iso_nm": "Rate_modulation_experiments.ANS"
+      },
+      "parameters": {
+        "g_f": "i_f.g_f",
+        "g_Na": "i_Na.g_Na",
+        "g_NaL": "i_Na.g_Na_L",
+        "g_CaL": "i_CaL.P_CaL",
+        "g_CaT": "i_CaT.P_CaT",
+        "g_to": "i_to.g_to",
+        "g_Kr": "i_Kr.g_Kr",
+        "g_Ks": "i_Ks.g_Ks_"
+      },
+      "currents": {
+        "If": "i_f.i_f",
+        "INa": "i_Na.i_Na",
+        "ICaL": "i_CaL.i_CaL",
+        "ICaT": "i_CaT.i_CaT",
+        "Ito": "i_to.i_to",
+        "IKr": "i_Kr.i_Kr",
+        "IKs": "i_Ks.i_Ks"
+      },
+      "voltage": "Membrane.V",
+      "calcium": "Ca_dynamics.Cai",
+      "sha256": "18401c61b7cc13b3b90d86e97598b61767ca29208ac9df180db84cde85d07ec5",
+      "runtime_sha256": "3723097ebd7986c781a78131397771982614b993f6a3e4dbfcbfe2d6be46971f",
+      "runtime_preparation": "Added two missing unit aliases, merged one duplicate component connection, and completed seven interface declarations required by CellML 1.0; equations and numerical values are unchanged.",
+      "download_date": "2026-10-09"
+    },
+    {
+      "id": "fabbri_2017",
+      "display_name": "Fabbri 2017 Human SAN",
+      "category": "pacemaker",
+      "developmental_stage": "adult",
+      "backend": "myokit",
+      "source_file": "external/myokit-models/c/fabbri-2017.mmt",
+      "source_url": "https://github.com/myokit/models/blob/e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d/c/fabbri-2017.mmt",
+      "source_revision": "e8ef6dbad6c1bf4446428f1f73dd0a4d164af40d",
+      "publication": {
+        "authors": "Fabbri et al.",
+        "year": 2017,
+        "doi": "10.1113/JP273259"
+      },
+      "license": {
+        "status": "CC-BY-3.0 (PMR exposure); curated implementation review_required",
+        "notes": "Myokit model documents derivative comparison and unit corrections."
+      },
+      "status": "enabled",
+      "default_cell_type": "sinoatrial_node",
+      "default_pacing": {
+        "mode": "spontaneous",
+        "frequency_hz": 0,
+        "stimulus_duration_ms": 0,
+        "stimulus_strength_nA": 0,
+        "offset_ms": 0,
+        "cm_pf": 50.0
+      },
+      "parameters": {
+        "g_f": "if.gf",
+        "g_Na": "ina.gNa",
+        "g_NaL": "ina.gNaL",
+        "g_CaL": "ical.P_CaL",
+        "g_CaT": "icat.P_CaT",
+        "g_to": "ito.gto",
+        "g_Kr": "ikr.gKr",
+        "g_Ks": "iks.gKs"
+      },
+      "currents": {
+        "If": "if.If",
+        "INa": "ina.INa",
+        "ICaL": "ical.ICaL",
+        "ICaT": "icat.ICaT",
+        "Ito": "ito.Ito",
+        "IKr": "ikr.IKr",
+        "IKs": "iks.IKs"
+      },
+      "voltage": "membrane.V",
+      "calcium": "calcium.Ca_i",
+      "sha256": "077a2965e48bc10f6d7f7a99d29ea748f339495dada6881dce442ed7858a3806",
+      "download_date": "2026-10-08"
+    },
+    {
+      "id": "grandits_2024",
+      "display_name": "Grandits Ventricular Emulator",
+      "category": "ventricular",
+      "developmental_stage": "adult",
+      "backend": "grandits",
+      "source_file": "external/grandits_emulator/cardiomyocyte_emulator/emulator_state.pt",
+      "auxiliary_files": [
+        "external/grandits_emulator/cardiomyocyte_emulator/emulator_hyperparams.npz"
+      ],
+      "source_url": "https://github.com/thomgrand/cardiomyocyte_emulator/tree/26ba43c619c0acf2fc853326aa4cd0578b786d6a",
+      "source_revision": "26ba43c619c0acf2fc853326aa4cd0578b786d6a",
+      "publication": {
+        "authors": "Grandits et al.",
+        "year": 2024,
+        "doi": null
+      },
+      "license": {
+        "status": "AGPL-3.0; deployment review_required",
+        "notes": "Network-service source obligations may apply."
+      },
+      "status": "enabled",
+      "default_cell_type": "ventricular_emulator",
+      "default_pacing": {
+        "mode": "single_beat",
+        "frequency_hz": 0,
+        "stimulus_duration_ms": 0,
+        "stimulus_strength_nA": 0,
+        "offset_ms": 0,
+        "cm_pf": 50.0
+      },
+      "parameters": {
+        "g_Na": "GNa",
+        "g_NaL": "GNaL_b",
+        "g_to": "Gto_b",
+        "g_Kr": "GKr_b",
+        "g_Ks": "GKs_b",
+        "g_K1": "GK1_b",
+        "g_NaCa": "Gncx_b",
+        "g_NaK": "Pnak_b",
+        "g_CaL": "PCa_b"
+      },
+      "currents": {},
+      "voltage": "Vm",
+      "calcium": null,
+      "sha256": "6ea30b3045c733f7fff58e0dd0a74f02d8115e6f9601485f7298cb2387b4d8ac",
+      "download_date": "2026-10-08"
+    },
+    {
+      "id": "simone_wt",
+      "display_name": "Simone–Trancuccio hiPSC Ventricular WT",
+      "category": "ventricular",
+      "developmental_stage": "hiPSC",
+      "backend": "simone_static",
+      "source_file": "model_assets/ventricular/simone/Simone_Trancuccio2025.m",
+      "source_url": "https://models.cellml.org/workspace/d92/rawfile/83903a0ad0a326782c7f35c4d51e9cea5dc6e90a/Simone_Trancuccio2025.m",
+      "source_revision": "83903a0ad0a326782c7f35c4d51e9cea5dc6e90a",
+      "publication": {
+        "authors": "Simone and Trancuccio et al.",
+        "year": 2025,
+        "doi": null
+      },
+      "license": {
+        "status": "NON-COMMERCIAL USE ONLY",
+        "notes": "Disabled pending static translation and numerical equivalence."
+      },
+      "status": "enabled",
+      "default_cell_type": "hiPSC_ventricular_wt",
+      "default_pacing": {
+        "mode": "spontaneous",
+        "frequency_hz": 0,
+        "stimulus_duration_ms": 0,
+        "stimulus_strength_nA": 0,
+        "offset_ms": 0,
+        "cm_pf": 98.7109
+      },
+      "parameters": {
+        "g_Na": "g_Na",
+        "g_NaL": "GNaLmax",
+        "g_CaL": "bGCaL",
+        "g_f": "g_f",
+        "g_to": "g_to",
+        "g_Ks": "g_Ks",
+        "g_Kr": "g_Kr",
+        "g_K1": "g_K1",
+        "g_NaCa": "kNaCa",
+        "g_NaK": "PNaK"
+      },
+      "currents": {
+        "INa": "INa",
+        "INaL": "INaL",
+        "ICaL": "ICaL",
+        "Ito": "Ito",
+        "IKr": "IKr",
+        "IKs": "IKs",
+        "IK1": "IK1",
+        "If": "If",
+        "INaCa": "INaCa",
+        "INaK": "INaK",
+        "Istim": "Istim"
+      },
+      "voltage": "Y(1)",
+      "calcium": null,
+      "sha256": "eed735631c09fef2de2ed3315de4c72e615dc39ecebe0a73cd440e00272105d0",
+      "download_date": null,
+      "runtime_file": "backend/app/backends/simone_static_rhs.py",
+      "runtime_sha256": "0ce152f40dacd8ef00fe10720c83ce168c3c984dfd187a952ffdc066440e2f64",
+      "auxiliary_files": [
+        "model_assets/ventricular/simone/Main_Simone_Trancuccio_2025.m"
+      ],
+      "auxiliary_sha256": {
+        "model_assets/ventricular/simone/Main_Simone_Trancuccio_2025.m": "5ba0ecbe4e6dedb9642e3bdaba48ce6e836b860b4ea93d4aa6f250854b0e3b38"
+      },
+      "parameter_baselines": {
+        "g_Na": 7850.09805696,
+        "g_NaL": 22.461225,
+        "g_CaL": 1.0,
+        "g_f": 13.89930287576,
+        "g_to": 38.61477694,
+        "g_Ks": 2.1891765999999997,
+        "g_Kr": 59.47355971,
+        "g_K1": 14.108942024000001,
+        "g_NaCa": 4353.0378342254,
+        "g_NaK": 3.5802032
+      },
+      "fractional_ts": 0.0
+    },
+    {
+      "id": "simone_ts22",
+      "display_name": "Simone–Trancuccio hiPSC Ventricular TS 22%",
+      "category": "ventricular",
+      "developmental_stage": "hiPSC",
+      "backend": "simone_static",
+      "source_file": "model_assets/ventricular/simone/Simone_Trancuccio2025.m",
+      "source_url": "https://models.cellml.org/workspace/d92/rawfile/83903a0ad0a326782c7f35c4d51e9cea5dc6e90a/Simone_Trancuccio2025.m",
+      "source_revision": "83903a0ad0a326782c7f35c4d51e9cea5dc6e90a",
+      "publication": {
+        "authors": "Simone and Trancuccio et al.",
+        "year": 2025,
+        "doi": null
+      },
+      "license": {
+        "status": "NON-COMMERCIAL USE ONLY",
+        "notes": "Disabled pending static translation and numerical equivalence."
+      },
+      "status": "enabled",
+      "default_cell_type": "hiPSC_ventricular_TS_22_percent",
+      "default_pacing": {
+        "mode": "spontaneous",
+        "frequency_hz": 0,
+        "stimulus_duration_ms": 0,
+        "stimulus_strength_nA": 0,
+        "offset_ms": 0,
+        "cm_pf": 98.7109
+      },
+      "parameters": {
+        "g_Na": "g_Na",
+        "g_NaL": "GNaLmax",
+        "g_CaL": "bGCaL",
+        "g_f": "g_f",
+        "g_to": "g_to",
+        "g_Ks": "g_Ks",
+        "g_Kr": "g_Kr",
+        "g_K1": "g_K1",
+        "g_NaCa": "kNaCa",
+        "g_NaK": "PNaK"
+      },
+      "currents": {
+        "INa": "INa",
+        "INaL": "INaL",
+        "ICaL": "ICaL",
+        "Ito": "Ito",
+        "IKr": "IKr",
+        "IKs": "IKs",
+        "IK1": "IK1",
+        "If": "If",
+        "INaCa": "INaCa",
+        "INaK": "INaK",
+        "Istim": "Istim"
+      },
+      "voltage": "Y(1)",
+      "calcium": null,
+      "sha256": "eed735631c09fef2de2ed3315de4c72e615dc39ecebe0a73cd440e00272105d0",
+      "download_date": null,
+      "runtime_file": "backend/app/backends/simone_static_rhs.py",
+      "runtime_sha256": "0ce152f40dacd8ef00fe10720c83ce168c3c984dfd187a952ffdc066440e2f64",
+      "auxiliary_files": [
+        "model_assets/ventricular/simone/Main_Simone_Trancuccio_2025.m"
+      ],
+      "auxiliary_sha256": {
+        "model_assets/ventricular/simone/Main_Simone_Trancuccio_2025.m": "5ba0ecbe4e6dedb9642e3bdaba48ce6e836b860b4ea93d4aa6f250854b0e3b38"
+      },
+      "parameter_baselines": {
+        "g_Na": 7850.09805696,
+        "g_NaL": 22.461225,
+        "g_CaL": 1.0,
+        "g_f": 13.89930287576,
+        "g_to": 38.61477694,
+        "g_Ks": 2.1891765999999997,
+        "g_Kr": 59.47355971,
+        "g_K1": 14.108942024000001,
+        "g_NaCa": 4353.0378342254,
+        "g_NaK": 3.5802032
+      },
+      "fractional_ts": 0.22
+    }
+  ]
+}

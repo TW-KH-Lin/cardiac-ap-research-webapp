@@ -1,0 +1,58 @@
+{
+  "model_id": "ord_2011",
+  "source_sha256": "0ba58e14b76714741b3125d638eb03806c1be48eadb56c578cc821c141344c27",
+  "request": {
+    "model_id": "ord_2011",
+    "duration_ms": 1000.0,
+    "pacing": null,
+    "prepace_beats": 50,
+    "parameters": {},
+    "include_currents": [
+      "INa",
+      "IKr",
+      "ICaL"
+    ],
+    "auto_rescue": false
+  },
+  "settings_actual": {
+    "pacing": {
+      "mode": "external",
+      "frequency_hz": 1.0,
+      "stimulus_duration_ms": 0.5,
+      "stimulus_strength_nA": 5.8,
+      "offset_ms": 200.0,
+      "cm_pf": 50.0
+    },
+    "prepace_beats": 50,
+    "native_stimulus_level": -116.0,
+    "native_stimulus_unit": "A/F",
+    "rescued": false,
+    "parameter_values": {}
+  },
+  "voltage_min_mv": -87.94183615497838,
+  "voltage_max_mv": 39.46563819200179,
+  "selected_metrics": {
+    "valid": true,
+    "upstroke_time_ms": 200.60000000000002,
+    "resting_mv": -87.94127741544861,
+    "peak_mv": 39.46563819200179,
+    "amplitude_mv": 127.4069156074504,
+    "dvdt_max_mv_per_ms": 241.075443924609,
+    "apd30_ms": 157.72191215919594,
+    "apd50_ms": 189.64894437399988,
+    "apd80_ms": 226.15920643219937,
+    "apd90_ms": 236.76956100811202,
+    "triangulation_ms": 79.04764884891608,
+    "ead_flag": false
+  },
+  "current_peak_abs": {
+    "INa": 9294.71341457651,
+    "IKr": 55.66695132561662,
+    "ICaL": 95.67524903321778
+  },
+  "tolerances": {
+    "trace_rmse_mv": 3.0,
+    "metric_relative": 0.1,
+    "current_peak_relative": 0.2
+  }
+}

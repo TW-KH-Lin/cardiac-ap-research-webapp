@@ -1,0 +1,58 @@
+{
+  "model_id": "simone_wt",
+  "source_sha256": "eed735631c09fef2de2ed3315de4c72e615dc39ecebe0a73cd440e00272105d0",
+  "request": {
+    "model_id": "simone_wt",
+    "duration_ms": 3000.0,
+    "pacing": null,
+    "prepace_beats": 0,
+    "parameters": {},
+    "model_options": {},
+    "include_currents": [
+      "INa",
+      "IKr",
+      "ICaL"
+    ],
+    "auto_rescue": false
+  },
+  "settings_actual": {
+    "pacing": {
+      "mode": "spontaneous",
+      "frequency_hz": 0.0,
+      "stimulus_duration_ms": 0.0,
+      "stimulus_strength_nA": 0.0,
+      "offset_ms": 0.0,
+      "cm_pf": 98.7109
+    },
+    "prepace_beats": 0,
+    "warmup_seconds": 0.0,
+    "fractional_ts": 0.0,
+    "model_options": {},
+    "rescued": false,
+    "parameter_values": {}
+  },
+  "voltage_min_mv": -71.58842933254982,
+  "voltage_max_mv": 32.9675131510935,
+  "selected_metrics": {
+    "mode": "spontaneous",
+    "valid": true,
+    "beat_count": 4,
+    "cycle_length_ms": 834.5999999999999,
+    "rate_bpm": 71.89072609633358,
+    "maximum_diastolic_potential_mv": -71.58841431584416,
+    "peak_mv": 32.967482763884746,
+    "amplitude_mv": 104.55589707972891,
+    "dvdt_max_mv_per_ms": 19.190178900047673,
+    "diastolic_depolarization_mv_per_ms": -0.0017955796445345699
+  },
+  "current_peak_abs": {
+    "INa": 1898.7090079327409,
+    "IKr": 78.91112324998424,
+    "ICaL": 532.0245090694684
+  },
+  "tolerances": {
+    "trace_rmse_mv": 3.0,
+    "metric_relative": 0.1,
+    "current_peak_relative": 0.2
+  }
+}

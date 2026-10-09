@@ -1,0 +1,15 @@
+{
+  "source_url": "https://models.cellml.org/workspace/c65/rawfile/95db8d627beef8d27783ae6fa2381a2fb47b123a/HumanSAN_Fabbri_Fantini_Wilders_Severi_2017.cellml",
+  "source_revision": "95db8d627beef8d27783ae6fa2381a2fb47b123a",
+  "sha256": "18401c61b7cc13b3b90d86e97598b61767ca29208ac9df180db84cde85d07ec5",
+  "publication": {
+    "authors": "Linder et al.",
+    "year": 2025,
+    "doi": "10.1113/JP287557"
+  },
+  "license": {
+    "status": "CC-BY-3.0",
+    "notes": "License shown by the published PMR exposure d14."
+  },
+  "default_cell_type": "sinoatrial_node_beta_adrenergic"
+}

@@ -1,0 +1,56 @@
+{
+  "model_id": "fabbri_2017",
+  "source_sha256": "077a2965e48bc10f6d7f7a99d29ea748f339495dada6881dce442ed7858a3806",
+  "request": {
+    "model_id": "fabbri_2017",
+    "duration_ms": 3000.0,
+    "pacing": null,
+    "prepace_beats": 5,
+    "parameters": {},
+    "include_currents": [
+      "If",
+      "IKr",
+      "ICaL"
+    ],
+    "auto_rescue": false
+  },
+  "settings_actual": {
+    "pacing": {
+      "mode": "spontaneous",
+      "frequency_hz": 0.0,
+      "stimulus_duration_ms": 0.0,
+      "stimulus_strength_nA": 0.0,
+      "offset_ms": 0.0,
+      "cm_pf": 50.0
+    },
+    "prepace_beats": 5,
+    "native_stimulus_level": null,
+    "native_stimulus_unit": null,
+    "rescued": false,
+    "parameter_values": {}
+  },
+  "voltage_min_mv": -58.885617915870405,
+  "voltage_max_mv": 26.4160808255998,
+  "selected_metrics": {
+    "mode": "spontaneous",
+    "valid": true,
+    "beat_count": 4,
+    "cycle_length_ms": 813.0,
+    "rate_bpm": 73.80073800738008,
+    "maximum_diastolic_potential_mv": -58.884187375858325,
+    "peak_mv": 26.4160808255998,
+    "amplitude_mv": 85.30026820145812,
+    "dvdt_max_mv_per_ms": 7.395894909790916,
+    "diastolic_depolarization_mv_per_ms": 0.021443233210166023
+  },
+  "current_peak_abs": {
+    "If": 1.3024305712036126,
+    "IKr": 89.11946846811425,
+    "ICaL": 360.233290068682
+  },
+  "tolerances": {
+    "trace_rmse_mv": 3.0,
+    "metric_relative": 0.1,
+    "current_peak_relative": 0.2
+  }
+}

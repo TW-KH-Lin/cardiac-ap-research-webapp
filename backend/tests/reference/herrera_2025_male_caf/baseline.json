@@ -1,0 +1,54 @@
+{
+  "model_id": "herrera_2025_male_caf",
+  "source_sha256": "4117f9160262a2c27be3c58cea3423b27fc369666a9896221a0d1a4c46ec36d2",
+  "request": {
+    "model_id": "herrera_2025_male_caf",
+    "duration_ms": 1000.0,
+    "pacing": null,
+    "prepace_beats": 0,
+    "parameters": {},
+    "model_options": {},
+    "include_currents": [],
+    "auto_rescue": false
+  },
+  "settings_actual": {
+    "pacing": {
+      "mode": "external",
+      "frequency_hz": 1.0,
+      "stimulus_duration_ms": 5.0,
+      "stimulus_strength_nA": 1.375,
+      "offset_ms": 0.0,
+      "cm_pf": 110.0
+    },
+    "prepace_beats": 0,
+    "model_options": {
+      "iso_nm": 0
+    },
+    "af_state": 1,
+    "female": 0,
+    "rescued": false,
+    "parameter_values": {}
+  },
+  "voltage_min_mv": -82.52358677143845,
+  "voltage_max_mv": 43.041502502537405,
+  "selected_metrics": {
+    "valid": true,
+    "upstroke_time_ms": 2.966127481873153,
+    "resting_mv": -82.52245144198287,
+    "peak_mv": 43.041502502537405,
+    "amplitude_mv": 125.56395394452028,
+    "dvdt_max_mv_per_ms": 239.61702114629472,
+    "apd30_ms": 10.734135061222307,
+    "apd50_ms": 101.15789099404583,
+    "apd80_ms": 190.07454539575912,
+    "apd90_ms": 229.7824404145722,
+    "triangulation_ms": 219.0483053533499,
+    "ead_flag": false
+  },
+  "current_peak_abs": {},
+  "tolerances": {
+    "trace_rmse_mv": 3.0,
+    "metric_relative": 0.1,
+    "current_peak_relative": 0.2
+  }
+}

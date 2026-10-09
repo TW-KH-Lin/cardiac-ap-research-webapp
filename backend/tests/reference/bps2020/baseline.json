@@ -1,0 +1,66 @@
+{
+  "model_id": "bps2020",
+  "source_sha256": "04ddd950a145323ccb15830175b1adca1563eaf7f2a8763bdbd68ed1ce8eeb18",
+  "request": {
+    "model_id": "bps2020",
+    "duration_ms": 1000.0,
+    "pacing": null,
+    "prepace_beats": 50,
+    "parameters": {},
+    "model_options": {},
+    "include_currents": [
+      "INa",
+      "IKr",
+      "ICaL"
+    ],
+    "auto_rescue": false
+  },
+  "settings_actual": {
+    "pacing": {
+      "mode": "external",
+      "frequency_hz": 1.0,
+      "stimulus_duration_ms": 1.0,
+      "stimulus_strength_nA": 1.1,
+      "offset_ms": 200.0,
+      "cm_pf": 50.0
+    },
+    "prepace_beats": 50,
+    "native_stimulus_level": -22.0,
+    "native_stimulus_unit": "A/F",
+    "rescued": false,
+    "parameter_values": {},
+    "model_options": {
+      "extracellular_calcium_mm": {
+        "native_name": "extracellular.cao",
+        "native_unit": "[mM]",
+        "value": 1.7
+      }
+    }
+  },
+  "voltage_min_mv": -87.95583862576663,
+  "voltage_max_mv": 40.31735484459809,
+  "selected_metrics": {
+    "valid": true,
+    "upstroke_time_ms": 217.60000000000002,
+    "resting_mv": -87.9412092015701,
+    "peak_mv": 40.31735484459809,
+    "amplitude_mv": 128.2585640461682,
+    "dvdt_max_mv_per_ms": 145.43201842178826,
+    "apd30_ms": 130.14647459471092,
+    "apd50_ms": 167.22569983174827,
+    "apd80_ms": 210.3927097857691,
+    "apd90_ms": 227.43124063463745,
+    "triangulation_ms": 97.28476603992652,
+    "ead_flag": false
+  },
+  "current_peak_abs": {
+    "INa": 8935.656991771382,
+    "IKr": 55.696355162590216,
+    "ICaL": 143.08102254568092
+  },
+  "tolerances": {
+    "trace_rmse_mv": 3.0,
+    "metric_relative": 0.1,
+    "current_peak_relative": 0.2
+  }
+}

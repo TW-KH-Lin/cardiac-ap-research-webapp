@@ -1,0 +1,71 @@
+{
+  "model_id": "linder_fabbri_2025",
+  "source_sha256": "18401c61b7cc13b3b90d86e97598b61767ca29208ac9df180db84cde85d07ec5",
+  "request": {
+    "model_id": "linder_fabbri_2025",
+    "duration_ms": 3000.0,
+    "pacing": null,
+    "prepace_beats": 5,
+    "parameters": {},
+    "model_options": {},
+    "include_currents": [
+      "If",
+      "IKr",
+      "ICaL"
+    ],
+    "auto_rescue": false
+  },
+  "settings_actual": {
+    "pacing": {
+      "mode": "spontaneous",
+      "frequency_hz": 0.0,
+      "stimulus_duration_ms": 0.0,
+      "stimulus_strength_nA": 0.0,
+      "offset_ms": 0.0,
+      "cm_pf": 50.0
+    },
+    "prepace_beats": 5,
+    "native_stimulus_level": null,
+    "native_stimulus_unit": null,
+    "rescued": false,
+    "parameter_values": {},
+    "model_options": {
+      "extracellular_calcium_mm": {
+        "native_name": "Ionic_values.Cao",
+        "native_unit": "[mM]",
+        "value": 1.8
+      },
+      "iso_nm": {
+        "native_name": "Rate_modulation_experiments.Iso_cas",
+        "native_unit": "[mM (1e-06)]",
+        "value": 0.0,
+        "activation_native_name": "Rate_modulation_experiments.ANS",
+        "activation_value": 0.0
+      }
+    }
+  },
+  "voltage_min_mv": -58.88425317807007,
+  "voltage_max_mv": 26.415104574497644,
+  "selected_metrics": {
+    "mode": "spontaneous",
+    "valid": true,
+    "beat_count": 4,
+    "cycle_length_ms": 813.0,
+    "rate_bpm": 73.80073800738008,
+    "maximum_diastolic_potential_mv": -58.8827586493033,
+    "peak_mv": 26.411681600923306,
+    "amplitude_mv": 85.2944402502266,
+    "dvdt_max_mv_per_ms": 7.391176490377979,
+    "diastolic_depolarization_mv_per_ms": 0.021370212464158236
+  },
+  "current_peak_abs": {
+    "If": 1.3024468199730304,
+    "IKr": 89.12462440904467,
+    "ICaL": 360.24960959873084
+  },
+  "tolerances": {
+    "trace_rmse_mv": 3.0,
+    "metric_relative": 0.1,
+    "current_peak_relative": 0.2
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "source_url": "https://models.cellml.org/workspace/d92/rawfile/83903a0ad0a326782c7f35c4d51e9cea5dc6e90a/Simone_Trancuccio2025.m",
+  "source_revision": "83903a0ad0a326782c7f35c4d51e9cea5dc6e90a",
+  "sha256": "eed735631c09fef2de2ed3315de4c72e615dc39ecebe0a73cd440e00272105d0",
+  "publication": {
+    "authors": "Simone and Trancuccio et al.",
+    "year": 2025,
+    "doi": null
+  },
+  "license": {
+    "status": "NON-COMMERCIAL USE ONLY",
+    "notes": "Disabled pending static translation and numerical equivalence."
+  },
+  "default_cell_type": "hiPSC_ventricular_wt"
+}

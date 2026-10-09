@@ -1,0 +1,29 @@
+name: scientific-regression
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Scientific runtime
+        run: sudo apt-get update && sudo apt-get install -y build-essential libsundials-dev octave
+      - name: Pinned public model sources
+        run: SUNDIALS_PREFIX=/usr bash scripts/fetch_models.sh
+      - name: Python dependencies
+        run: python -m pip install -r backend/requirements-test.txt
+      - name: Numerical and API regression
+        run: python -m pytest backend/tests -q
+      - name: Frontend dependencies and build
+        run: |
+          npm install -g pnpm@11.19.0
+          cd frontend
+          pnpm install --frozen-lockfile --config.dangerouslyAllowAllBuilds=true
+          pnpm build
+      - name: Docker build
+        run: docker build -t cardiac-ap:test .

@@ -1,0 +1,44 @@
+{
+  "model_id": "grandits_2024",
+  "source_sha256": "6ea30b3045c733f7fff58e0dd0a74f02d8115e6f9601485f7298cb2387b4d8ac",
+  "request": {
+    "model_id": "grandits_2024",
+    "duration_ms": 500.0,
+    "pacing": null,
+    "prepace_beats": 0,
+    "parameters": {},
+    "include_currents": [],
+    "auto_rescue": false
+  },
+  "settings_actual": {
+    "pacing": {
+      "mode": "single_beat",
+      "stimulus_strength_nA": null
+    },
+    "prepace_beats": 0,
+    "rescued": false,
+    "parameter_values": {}
+  },
+  "voltage_min_mv": -89.21656036376953,
+  "voltage_max_mv": 34.255828857421875,
+  "selected_metrics": {
+    "valid": true,
+    "upstroke_time_ms": 1.5,
+    "resting_mv": -89.19283676147461,
+    "peak_mv": 34.255828857421875,
+    "amplitude_mv": 123.44866561889648,
+    "dvdt_max_mv_per_ms": 130.29945182800293,
+    "apd30_ms": 165.84102198225995,
+    "apd50_ms": 219.5705060385268,
+    "apd80_ms": 262.8201188536375,
+    "apd90_ms": 272.9982725355749,
+    "triangulation_ms": 107.15725055331498,
+    "ead_flag": false
+  },
+  "current_peak_abs": {},
+  "tolerances": {
+    "trace_rmse_mv": 3,
+    "metric_relative": 0.1,
+    "current_peak_relative": 0.2
+  }
+}
