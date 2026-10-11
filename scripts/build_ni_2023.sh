@@ -3,17 +3,19 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SOURCE="$ROOT/external/ni_2023_atrial/Single_Cells"
+BUILD_SOURCE="$ROOT/.build/ni_2023/Single_Cells"
 PREFIX="${SUNDIALS_PREFIX:-$ROOT/.local/sundials}"
 OUTPUT="$ROOT/model_assets/atrial/ni_2023/ni_single_cell"
 
 test -f "$SOURCE/main_HAM_Signalling_cvode_new.cpp"
 test -f "$PREFIX/include/sundials/sundials_config.h"
 mkdir -p "$(dirname "$OUTPUT")"
+python3 "$ROOT/scripts/prepare_ni_build_source.py"
 
 "${CXX:-c++}" -std=c++14 -O2 \
   -include "$ROOT/backend/native/ni_2023/sundials6_compat.hpp" \
-  -I"$SOURCE/lib" -I"$PREFIX/include" -L"$PREFIX/lib" \
-  "$ROOT/backend/native/ni_2023/driver.cpp" "$SOURCE"/lib/*.cpp \
+  -I"$BUILD_SOURCE/lib" -I"$PREFIX/include" -L"$PREFIX/lib" \
+  "$ROOT/backend/native/ni_2023/driver.cpp" "$BUILD_SOURCE"/lib/*.cpp \
   -lsundials_cvode -lsundials_nvecserial -lsundials_sunmatrixdense \
   -lsundials_sunlinsoldense -lsundials_generic -lz \
   -Wl,-rpath,"$PREFIX/lib" -o "$OUTPUT"

@@ -8,7 +8,7 @@
 - Source revisions and SHA-256 hashes are recorded in `backend/app/models/manifest.json`.
 - Runtime simulations use local pinned assets only.
 - The Grandits Torch checkpoint is hash checked before deserialization.
-- The Ni C++ checkout and all legacy files remain unchanged; compatibility and adapters are separate.
+- The Ni C++ checkout and all legacy files remain unchanged; compatibility and adapters are separate. The native build uses a temporary source copy with explicit returns for four state-update functions whose return values are discarded upstream, eliminating GCC undefined behavior without changing model state.
 - Baseline voltage traces, metrics, current peaks, protocols, and provenance are stored under `backend/tests/reference/`.
 - Auto rescue is off. A failed capture never changes the requested stimulus.
 

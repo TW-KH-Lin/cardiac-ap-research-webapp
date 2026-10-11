@@ -51,7 +51,7 @@ To bootstrap only sources from GitHub:
 FETCH_PMR=0 SUNDIALS_PREFIX=/usr bash scripts/fetch_models.sh
 ```
 
-The Ni build targets SUNDIALS 6 while preserving the upstream SUNDIALS 5.7 source unchanged:
+The Ni build targets SUNDIALS 6 while preserving the upstream SUNDIALS 5.7 source unchanged. It compiles a temporary copy with explicit return values for four state-update functions whose upstream callers discard the return value; this removes compiler-dependent undefined behavior without changing the equations or state updates:
 
 ```bash
 SUNDIALS_PREFIX=/usr bash scripts/build_ni_2023.sh
