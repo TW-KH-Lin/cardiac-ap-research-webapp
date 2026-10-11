@@ -75,14 +75,14 @@ Open `http://127.0.0.1:8000`.
 
 ## Docker
 
-Fetch the pinned Git sources first, then build:
+Fetch every pinned model source first, then build:
 
 ```bash
-FETCH_PMR=0 SUNDIALS_PREFIX=/usr bash scripts/fetch_models.sh
+SUNDIALS_PREFIX=/usr bash scripts/fetch_models.sh
 docker compose up --build
 ```
 
-The image compiles the Ni adapter inside Linux, avoiding reuse of a host binary.
+The image compiles the Ni adapter inside Linux, avoiding reuse of a host binary, and installs Octave for the four Herrera variants.
 
 ## Tests
 

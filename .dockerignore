@@ -7,8 +7,8 @@ frontend/dist
 backend/tests
 external/*/.git
 external/sundials
-external/ni_2023_atrial
-external/herrera_2025_atrial
 cardiac_codex_starter
+.runtime
+cardiac-ap-site
 __pycache__
 *.pyc

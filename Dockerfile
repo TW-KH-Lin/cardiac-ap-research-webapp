@@ -9,7 +9,7 @@ RUN pnpm build
 FROM python:3.12-slim AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONPATH=/app/backend
 WORKDIR /app
-RUN apt-get update && apt-get install -y --no-install-recommends build-essential libsundials-dev && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential libsundials-dev octave && rm -rf /var/lib/apt/lists/*
 COPY backend/requirements.txt backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt
 COPY backend/app backend/app
@@ -21,6 +21,7 @@ COPY external/myokit-models/c/fabbri-2017.mmt external/myokit-models/c/fabbri-20
 COPY external/grandits_emulator/cardiomyocyte_emulator external/grandits_emulator/cardiomyocyte_emulator
 COPY model_assets model_assets
 COPY external/ni_2023_atrial/Single_Cells external/ni_2023_atrial/Single_Cells
+COPY ["external/herrera_2025_atrial/Single Cell", "external/herrera_2025_atrial/Single Cell"]
 COPY backend/native backend/native
 COPY scripts/build_ni_2023.sh scripts/build_ni_2023.sh
 RUN SUNDIALS_PREFIX=/usr scripts/build_ni_2023.sh
