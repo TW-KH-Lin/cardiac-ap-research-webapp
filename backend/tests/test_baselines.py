@@ -32,10 +32,23 @@ def test_pinned_baseline_regression(model_id):
     }[entry["backend"]]()
     result = backend.simulate(entry, SimulationRequest.model_validate(reference["request"]))
     fixture = np.load(REFERENCE / model_id / "baseline_trace.npz")
+    time = np.asarray(result["time_ms"])
     voltage = np.asarray(result["voltage_mv"])
+    fixture_time = fixture["time_ms"]
+    fixture_voltage = fixture["voltage_mv"]
     assert np.all(np.isfinite(voltage))
-    assert len(voltage) == len(fixture["voltage_mv"])
-    assert np.sqrt(np.mean((voltage - fixture["voltage_mv"]) ** 2)) < reference["tolerances"]["trace_rmse_mv"]
+    assert np.all(np.diff(time) > 0)
+    if entry["backend"] == "herrera_octave":
+        # Octave's adaptive solver can accept a few different internal steps
+        # across supported platforms. Compare the continuous trajectory on the
+        # pinned reference grid rather than treating the step count as science.
+        assert np.allclose(time[[0, -1]], fixture_time[[0, -1]], atol=1e-6)
+        comparable_voltage = np.interp(fixture_time, time, voltage)
+    else:
+        assert len(voltage) == len(fixture_voltage)
+        assert np.allclose(time, fixture_time, rtol=0, atol=1e-9)
+        comparable_voltage = voltage
+    assert np.sqrt(np.mean((comparable_voltage - fixture_voltage) ** 2)) < reference["tolerances"]["trace_rmse_mv"]
     assert np.ptp(voltage) > 30
     selected = result["metrics"].get("last_valid_beat") if result["metrics"]["mode"] == "paced" else result["metrics"]
     assert selected and selected["valid"]
