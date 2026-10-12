@@ -24,6 +24,7 @@ COPY external/ni_2023_atrial/Single_Cells external/ni_2023_atrial/Single_Cells
 COPY ["external/herrera_2025_atrial/Single Cell", "external/herrera_2025_atrial/Single Cell"]
 COPY backend/native backend/native
 COPY scripts/build_ni_2023.sh scripts/build_ni_2023.sh
+COPY scripts/prepare_ni_build_source.py scripts/prepare_ni_build_source.py
 RUN SUNDIALS_PREFIX=/usr scripts/build_ni_2023.sh
 EXPOSE 8000
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
