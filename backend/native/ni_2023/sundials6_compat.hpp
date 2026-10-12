@@ -9,6 +9,12 @@
 #include <sunlinsol/sunlinsol_dense.h>
 #include <sunmatrix/sunmatrix_dense.h>
 #include <sundials/sundials_context.h>
+#include <sundials/sundials_types.h>
+#include <sundials/sundials_version.h>
+
+#if SUNDIALS_VERSION_MAJOR >= 7
+using realtype = sunrealtype;
+#endif
 
 inline SUNContext ni_sundials_context() {
     static SUNContext context = [] {
