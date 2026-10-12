@@ -58,6 +58,7 @@ int main(int argc, char** argv) {
         return 2;
     }
     try {
+        NiMpiScope mpi_scope;
         const double bcl = number(argv[1], "BCL");
         const int prepace_beats = integer(argv[2], "prepace beats");
         const double duration = number(argv[3], "duration");

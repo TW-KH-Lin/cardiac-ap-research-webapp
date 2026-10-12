@@ -17,13 +17,18 @@ if [[ ! "$SUNDIALS_MAJOR" =~ ^[0-9]+$ ]]; then
   echo "Unable to determine the installed SUNDIALS major version" >&2
   exit 1
 fi
+SUNDIALS_MPI_ENABLED="$(awk '$2 == "SUNDIALS_MPI_ENABLED" { print $3 }' "$PREFIX/include/sundials/sundials_config.h")"
+COMPILER="${CXX:-c++}"
+if [[ "$SUNDIALS_MPI_ENABLED" == "1" && -z "${CXX:-}" ]]; then
+  COMPILER="mpic++"
+fi
 if (( SUNDIALS_MAJOR >= 7 )); then
   SUNDIALS_SUPPORT_LIBRARY="-lsundials_core"
 else
   SUNDIALS_SUPPORT_LIBRARY="-lsundials_generic"
 fi
 
-"${CXX:-c++}" -std=c++14 -O2 \
+"$COMPILER" -std=c++14 -O2 \
   -include "$ROOT/backend/native/ni_2023/sundials6_compat.hpp" \
   -I"$BUILD_SOURCE/lib" -I"$PREFIX/include" -L"$PREFIX/lib" \
   "$ROOT/backend/native/ni_2023/driver.cpp" "$BUILD_SOURCE"/lib/*.cpp \
