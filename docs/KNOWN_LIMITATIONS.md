@@ -19,11 +19,11 @@
 ## Runtime and performance
 
 - First Myokit use compiles native simulation code and may be slower than later runs.
-- Herrera requires the installed Octave environment under `.runtime/mamba`; its original-source simulations take roughly 45 seconds per one-second trace on the development host.
+- Herrera requires GNU Octave, either from the pinned environment under `.runtime/mamba` or from `PATH`; its original-source simulations take roughly 45 seconds per one-second trace on the development host.
 - Browser plots use returned arrays directly. Scientific metrics are computed before presentation.
 
 ## Deployment
 
-- The published ChatGPT Site is a static frontend whose simulation API is tunneled from the development Mac. It works while that Mac, the backend, and the tunnel remain running.
-- The Docker image does not currently install the Herrera Octave runtime.
+- The published ChatGPT Site is a static, phone-friendly catalog and interface. ChatGPT Sites cannot execute the Python, native C++, SUNDIALS, Torch, Myokit, and Octave runtimes used by the scientific backend. When no external scientific server is connected, it keeps the complete catalog visible and disables simulation controls with an explicit status message.
+- The Docker image installs GNU Octave and includes the four pinned Herrera source variants.
 - License review is required before public or commercial deployment, especially for GPL/AGPL, noncommercial, and unspecified source terms.

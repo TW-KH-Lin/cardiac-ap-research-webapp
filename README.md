@@ -22,6 +22,13 @@ All 14 catalog entries are enabled on the development host.
 
 The Models page exposes the revision, license status, and provenance for every entry.
 
+## Published access
+
+- [ChatGPT Site](https://cardiac-ap-simulator.tw-kh-lin.chatgpt.site/) — phone-friendly interface and complete bundled model catalog. Scientific controls activate when a compatible backend is connected.
+- [GitHub repository](https://github.com/TW-KH-Lin/cardiac-ap-research-webapp) — validated source, tests, and the Docker deployment that runs all 14 model entries.
+
+ChatGPT Sites cannot host the native scientific stack used by this project. The Docker deployment is the complete runnable research application; the Site reports server availability explicitly instead of hiding the catalog when compute is unavailable.
+
 ## Features
 
 - Unified simulation and comparison API for ventricular, atrial, and SAN models
@@ -59,7 +66,7 @@ SUNDIALS_PREFIX=/usr bash scripts/build_ni_2023.sh
 
 ## Run locally
 
-Requirements: Python 3.12, a C/C++ compiler, SUNDIALS/CVODES, Node.js, pnpm, and GNU Octave 10.3 for Herrera runs.
+Requirements: Python 3.12, a C/C++ compiler, SUNDIALS/CVODES, Node.js, pnpm, and GNU Octave for Herrera runs. The committed Herrera reference fixtures were generated with Octave 10.3; CI also exercises the distribution-provided Octave runtime.
 
 ```bash
 python3 -m venv .venv

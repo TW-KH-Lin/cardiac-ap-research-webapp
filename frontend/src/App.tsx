@@ -3,9 +3,12 @@ import Plotly from 'plotly.js-dist-min'
 import type { Model, Result, SimConfig, Pacing, ParameterChange } from './types'
 import Fitting from './Fitting'
 import { API } from './api'
+import manifest from '../../backend/app/models/manifest.json'
 
 type View = 'simulator' | 'compare' | 'fitting' | 'models'
 const COLORS = ['#d68453', '#3b8290', '#8f6cbd', '#a5a752']
+const REPOSITORY_URL = 'https://github.com/TW-KH-Lin/cardiac-ap-research-webapp'
+const bundledModels = manifest.models as unknown as Model[]
 
 async function jsonRequest<T>(url: string, body?: unknown): Promise<T> {
   const response = await fetch(url, body === undefined ? undefined : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
@@ -161,16 +164,38 @@ export default function App() {
   const [compareResults, setCompareResults] = useState<Result[]>([])
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
+  const [serverAvailable, setServerAvailable] = useState<boolean | null>(null)
 
-  useEffect(() => { void jsonRequest<Model[]>(`${API}/models`).then(items => {
+  function initializeCatalog(items: Model[]) {
     setModels(items)
     const first = items.find(item => item.id === 'torord_dyncl_endo' && item.status === 'enabled') ?? items.find(item => item.status === 'enabled')
     if (first) { setConfig(defaultConfig(first)); setCompareConfigs([defaultConfig(first), defaultConfig(items.find(item => item.id === 'ord_2011' && item.status === 'enabled') ?? first)]) }
-  }).catch(err => setError(`Model catalog unavailable: ${err.message}`)) }, [])
-  useEffect(() => { if (config) void jsonRequest<Model>(`${API}/models/${config.model_id}`).then(setDetail).catch(err => setError(err.message)) }, [config?.model_id])
+  }
+
+  useEffect(() => { void jsonRequest<Model[]>(`${API}/models`).then(items => {
+    setServerAvailable(true)
+    initializeCatalog(items)
+  }).catch(() => {
+    setServerAvailable(false)
+    initializeCatalog(bundledModels)
+  }) }, [])
+  useEffect(() => {
+    if (!config) return
+    if (serverAvailable === false) {
+      setDetail(models.find(item => item.id === config.model_id) ?? null)
+      return
+    }
+    if (serverAvailable === true) void jsonRequest<Model>(`${API}/models/${config.model_id}`).then(setDetail).catch(err => setError(err.message))
+  }, [config?.model_id, serverAvailable, models])
   useEffect(() => { compareConfigs.forEach(item => {
-    if (!compareDetails[item.model_id]) void jsonRequest<Model>(`${API}/models/${item.model_id}`).then(value => setCompareDetails(old => ({ ...old, [item.model_id]: value }))).catch(err => setError(err.message))
-  }) }, [compareConfigs.map(item => item.model_id).join(',')])
+    if (compareDetails[item.model_id]) return
+    if (serverAvailable === false) {
+      const value = models.find(model => model.id === item.model_id)
+      if (value) setCompareDetails(old => ({ ...old, [item.model_id]: value }))
+    } else if (serverAvailable === true) {
+      void jsonRequest<Model>(`${API}/models/${item.model_id}`).then(value => setCompareDetails(old => ({ ...old, [item.model_id]: value }))).catch(err => setError(err.message))
+    }
+  }) }, [compareConfigs.map(item => item.model_id).join(','), serverAvailable, models])
 
   async function runOne() {
     if (!config) return
@@ -187,8 +212,9 @@ export default function App() {
     <header className="topbar"><div className="brand"><span className="brand-mark">∿</span><div><strong>Cardiac AP</strong><small>Research workspace</small></div></div><nav aria-label="Main navigation">
       {(['simulator', 'compare', 'fitting', 'models'] as View[]).map(item => <button key={item} className={view === item ? 'active' : ''} onClick={() => { setView(item); setError('') }}>{item[0].toUpperCase() + item.slice(1)}</button>)}
     </nav><span className="research-tag">Research exploration only</span></header>
+    {serverAvailable === false && <div className="connection-banner" role="status"><strong>Scientific server offline.</strong> The complete 14-model catalog remains available here. Simulations, comparisons, and fitting run in the validated Docker backend from <a href={REPOSITORY_URL} target="_blank" rel="noreferrer">the public GitHub repository ↗</a>.</div>}
     {error && <div className="error-banner" role="alert">{error}<button onClick={() => setError('')} aria-label="Dismiss error">×</button></div>}
-    {view === 'simulator' && config && <main className="workspace"><aside className="controls"><div className="panel-title"><p className="eyebrow">01 / SIMULATOR</p><h1>Configure a run</h1></div><button className="primary-button" onClick={runOne} disabled={busy || detail?.status !== 'enabled'}>{busy ? 'Running…' : 'Run simulation'} <span>→</span></button><ConfigEditor models={models} config={config} detail={detail} onChange={setConfig} /></aside>
+    {view === 'simulator' && config && <main className="workspace"><aside className="controls"><div className="panel-title"><p className="eyebrow">01 / SIMULATOR</p><h1>Configure a run</h1></div><button className="primary-button" onClick={runOne} disabled={busy || serverAvailable !== true || detail?.status !== 'enabled'}>{busy ? 'Running…' : serverAvailable === false ? 'Server offline' : 'Run simulation'} <span>→</span></button><ConfigEditor models={models} config={config} detail={detail} onChange={setConfig} /></aside>
       <section className="results"><div className="results-heading"><div><p className="eyebrow">ACTION POTENTIAL</p><h2>{result ? models.find(item => item.id === result.model_id)?.display_name : 'Trace preview'}</h2></div>{result && <div className="export-actions"><button onClick={() => download(`${result.model_id}.json`, JSON.stringify(result, null, 2), 'application/json')}>↓ JSON</button><button onClick={() => download(`${result.model_id}.csv`, resultCsv(result), 'text/csv')}>↓ CSV</button></div>}</div>
         {result ? <><div className="chart-card"><Plot traces={[{ x: result.time_ms, y: result.voltage_mv, name: 'Vm', color: COLORS[0] }]} yTitle="Membrane potential (mV)" /></div><Metrics result={result} />
           {result.warnings.map(warning => <div className="warning" key={warning}>{warning}</div>)}
@@ -197,12 +223,12 @@ export default function App() {
           <details className="about"><summary>Protocol and applied parameters</summary><pre>{JSON.stringify({ requested: result.settings_requested, actual: result.settings_actual }, null, 2)}</pre></details></> : <div className="empty-state"><div className="empty-wave">∿</div><h3>Ready to simulate</h3><p>Choose a model and protocol, then run it to inspect voltage, biomarkers, and currents.</p></div>}
         {detail && <ModelInfo model={detail} />}
       </section></main>}
-    {view === 'compare' && <main className="compare-page"><div className="page-heading"><div><p className="eyebrow">02 / COMPARE</p><h1>Overlay model runs</h1><p>Compare 2–4 traces with each model’s protocol and parameters shown separately.</p></div><button className="primary-button" onClick={runCompare} disabled={busy || compareConfigs.length < 2}>{busy ? 'Running…' : 'Run comparison'} →</button></div>
+    {view === 'compare' && <main className="compare-page"><div className="page-heading"><div><p className="eyebrow">02 / COMPARE</p><h1>Overlay model runs</h1><p>Compare 2–4 traces with each model’s protocol and parameters shown separately.</p></div><button className="primary-button" onClick={runCompare} disabled={busy || serverAvailable !== true || compareConfigs.length < 2}>{busy ? 'Running…' : serverAvailable === false ? 'Server offline' : 'Run comparison'} →</button></div>
       <div className="comparison-editors">{compareConfigs.map((item, index) => <section className="comparison-card" key={index}><div className="comparison-card-title"><strong>Run {index + 1}</strong>{compareConfigs.length > 2 && <button onClick={() => setCompareConfigs(previous => previous.filter((_, i) => i !== index))}>Remove</button>}</div><ConfigEditor models={models} config={item} detail={compareDetails[item.model_id] ?? null} onChange={value => updateComparison(index, value)} compact /></section>)}</div>
       {compareConfigs.length < 4 && <button className="add-button" onClick={() => setCompareConfigs(previous => [...previous, defaultConfig(models.find(item => item.id === previous[0]?.model_id) ?? models[0])])}>+ Add run</button>}
       {compareResults.length > 0 && <><div className="chart-card"><div className="chart-heading"><h2>Voltage overlay</h2><button onClick={() => download('cardiac-comparison.json', JSON.stringify(compareResults, null, 2), 'application/json')}>↓ JSON</button></div><Plot traces={compareResults.map((item, index) => ({ x: item.time_ms, y: item.voltage_mv, name: `${models.find(model => model.id === item.model_id)?.display_name ?? item.model_id} · run ${index + 1}`, color: COLORS[index] }))} yTitle="Membrane potential (mV)" height={450} /></div><div className="comparison-summary">{compareResults.map((item, index) => <article key={index}><h3><span style={{ background: COLORS[index] }} />Run {index + 1}: {models.find(model => model.id === item.model_id)?.display_name}</h3><Metrics result={item} /><p>Revision {item.model_version.slice(0, 10)} · {String((item.settings_actual.pacing as Pacing)?.mode)} pacing · {Object.keys(item.settings_requested.parameters).length} changed parameters</p><details><summary>Requested and actual settings</summary><pre>{JSON.stringify({ requested: item.settings_requested, actual: item.settings_actual }, null, 2)}</pre></details></article>)}</div><p className="comparison-caveat">Absolute conductance values are not directly comparable across different model formulations.</p></>}
     </main>}
-    {view === 'fitting' && <Fitting />}
+    {view === 'fitting' && (serverAvailable === false ? <main className="fitting-placeholder"><p className="eyebrow">03 / FITTING</p><h1>Scientific server offline</h1><p>Grandits fitting and independent ToR-ORd validation require the validated Python and Torch backend. Run the Docker deployment from <a href={REPOSITORY_URL} target="_blank" rel="noreferrer">the public repository ↗</a>.</p></main> : <Fitting />)}
     {view === 'models' && <main className="models-page"><div className="page-heading"><div><p className="eyebrow">04 / MODEL CATALOG</p><h1>Scientific sources and availability</h1><p>Every model reports its pinned revision, license status, runtime status, and exact blocker when unavailable.</p></div></div>
       <div className="model-catalog">{models.map(model => <article className="model-card" key={model.id}>
         <div className="model-card-head"><div><span className="model-category">{model.category} · {model.developmental_stage}</span><h2>{model.display_name}</h2></div><span className={`status ${model.status}`}>{model.status}</span></div>

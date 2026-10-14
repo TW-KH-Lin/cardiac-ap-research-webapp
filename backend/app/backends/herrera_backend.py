@@ -93,7 +93,7 @@ class HerreraBackend(SimulationBackend):
         elif octave_executable:
             command = [octave_executable, "--quiet"]
         else:
-            raise ValueError("GNU Octave 10.3 is required for Herrera simulations")
+            raise ValueError("GNU Octave is required for Herrera simulations")
         command.extend([
             str(runner), str(source_dir), str(initial), f"{total_ms:.12g}", f"{pacing.frequency_hz:.12g}",
             str(int(entry["af_state"])), str(int(entry["female"])), f"{iso_nm / 1000.0:.12g}", str(output_path),
