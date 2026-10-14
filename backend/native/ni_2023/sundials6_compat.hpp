@@ -16,43 +16,14 @@
 using realtype = sunrealtype;
 #endif
 
-#if SUNDIALS_MPI_ENABLED
-#include <mpi.h>
-#endif
-
-class NiMpiScope {
-  public:
-    NiMpiScope() {
-#if SUNDIALS_MPI_ENABLED
-        int initialized = 0;
-        MPI_Initialized(&initialized);
-        if (!initialized) {
-            owns_mpi_ = MPI_Init(nullptr, nullptr) == MPI_SUCCESS;
-        }
-#endif
-    }
-
-    ~NiMpiScope() {
-#if SUNDIALS_MPI_ENABLED
-        int finalized = 0;
-        MPI_Finalized(&finalized);
-        if (owns_mpi_ && !finalized) {
-            MPI_Finalize();
-        }
-#endif
-    }
-
-    NiMpiScope(const NiMpiScope&) = delete;
-    NiMpiScope& operator=(const NiMpiScope&) = delete;
-
-  private:
-    bool owns_mpi_ = false;
-};
-
 inline SUNContext ni_sundials_context() {
     static SUNContext context = [] {
         SUNContext value = nullptr;
+#if SUNDIALS_VERSION_MAJOR >= 7
+        if (SUNContext_Create(SUN_COMM_NULL, &value) != 0) {
+#else
         if (SUNContext_Create(nullptr, &value) != 0) {
+#endif
             return static_cast<SUNContext>(nullptr);
         }
         return value;
