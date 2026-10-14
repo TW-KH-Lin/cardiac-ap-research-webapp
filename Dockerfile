@@ -20,7 +20,7 @@ COPY backend/native backend/native
 COPY scripts scripts
 # Fetch fixed upstream revisions and compile the Ni adapter while the image is
 # built. The running service performs no model downloads.
-RUN CXX=mpic++ SUNDIALS_PREFIX=/usr scripts/fetch_models.sh \
+RUN CXX=mpic++ SUNDIALS_PREFIX=/usr bash scripts/fetch_models.sh \
     && find external -type d -name .git -prune -exec rm -rf '{}' + \
     && rm -rf .build
 EXPOSE 8000
