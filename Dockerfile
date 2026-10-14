@@ -3,6 +3,7 @@ WORKDIR /app/frontend
 RUN npm install -g pnpm@11.19.0
 COPY frontend/package.json frontend/pnpm-lock.yaml ./
 RUN CI=true pnpm install --frozen-lockfile --config.dangerouslyAllowAllBuilds=true
+COPY backend/app/models/manifest.json /app/backend/app/models/manifest.json
 COPY frontend/ ./
 RUN pnpm build
 
