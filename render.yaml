@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: cardiac-ap-research-api
+    runtime: docker
+    plan: free
+    repo: https://github.com/TW-KH-Lin/cardiac-ap-research-webapp
+    branch: main
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: WEB_CONCURRENCY
+        value: "1"

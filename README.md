@@ -82,14 +82,19 @@ Open `http://127.0.0.1:8000`.
 
 ## Docker
 
-Fetch every pinned model source first, then build:
+The Docker build fetches every model from its pinned upstream revision and compiles the Ni adapter. The running container does not download models:
 
 ```bash
-SUNDIALS_PREFIX=/usr bash scripts/fetch_models.sh
 docker compose up --build
 ```
 
 The image compiles the Ni adapter inside Linux, avoiding reuse of a host binary, and installs Octave for the four Herrera variants.
+
+## Persistent cloud deployment
+
+The repository includes a [`render.yaml`](render.yaml) Blueprint for a persistent web service. It builds the same validated Docker image, binds Uvicorn to the provider assigned `PORT`, uses one worker to limit scientific runtime memory, and checks `/api/health`. Deploying this service makes both the web interface and all API routes available from the service URL without keeping a personal computer online.
+
+The initial Render service can use the provider's free instance for functional evaluation. Free instances may sleep when idle; an always running instance requires a paid Render plan selected in the Render account. Review [`LICENSE_NOTES.md`](LICENSE_NOTES.md) before deploying model implementations to a research institution.
 
 ## Tests
 
