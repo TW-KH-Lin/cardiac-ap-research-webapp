@@ -12,7 +12,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONPATH=/app/backend
 WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential ca-certificates curl git libsundials-dev mpi-default-dev octave && rm -rf /var/lib/apt/lists/*
 COPY backend/requirements.txt backend/requirements.txt
-RUN pip install --no-cache-dir -r backend/requirements.txt
+RUN pip install --no-cache-dir torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir -r backend/requirements.txt
 COPY backend/app backend/app
 COPY --from=frontend /app/frontend/dist frontend/dist
 COPY backend/native backend/native
