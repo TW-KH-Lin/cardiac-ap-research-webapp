@@ -172,13 +172,28 @@ export default function App() {
     if (first) { setConfig(defaultConfig(first)); setCompareConfigs([defaultConfig(first), defaultConfig(items.find(item => item.id === 'ord_2011' && item.status === 'enabled') ?? first)]) }
   }
 
-  useEffect(() => { void jsonRequest<Model[]>(`${API}/models`).then(items => {
-    setServerAvailable(true)
-    initializeCatalog(items)
-  }).catch(() => {
-    setServerAvailable(false)
+  useEffect(() => {
+    let cancelled = false
+    let retry: ReturnType<typeof setTimeout>
     initializeCatalog(bundledModels)
-  }) }, [])
+    async function connect() {
+      try {
+        const response = await fetch(`${API}/models`, { signal: AbortSignal.timeout(90000) })
+        if (!response.ok) throw new Error('Server unavailable')
+        const items = await response.json() as Model[]
+        if (cancelled) return
+        setModels(items)
+        setCompareDetails({})
+        setServerAvailable(true)
+      } catch {
+        if (cancelled) return
+        setServerAvailable(false)
+        retry = setTimeout(connect, 10000)
+      }
+    }
+    void connect()
+    return () => { cancelled = true; clearTimeout(retry) }
+  }, [])
   useEffect(() => {
     if (!config) return
     if (serverAvailable === false) {
@@ -212,7 +227,7 @@ export default function App() {
     <header className="topbar"><div className="brand"><span className="brand-mark">∿</span><div><strong>Cardiac AP</strong><small>Research workspace</small></div></div><nav aria-label="Main navigation">
       {(['simulator', 'compare', 'fitting', 'models'] as View[]).map(item => <button key={item} className={view === item ? 'active' : ''} onClick={() => { setView(item); setError('') }}>{item[0].toUpperCase() + item.slice(1)}</button>)}
     </nav><span className="research-tag">Research exploration only</span></header>
-    {serverAvailable === false && <div className="connection-banner" role="status"><strong>Scientific server offline.</strong> The complete 14-model catalog remains available here. Simulations, comparisons, and fitting run in the validated Docker backend from <a href={REPOSITORY_URL} target="_blank" rel="noreferrer">the public GitHub repository ↗</a>.</div>}
+    {serverAvailable !== true && <div className="connection-banner" role="status"><strong>{serverAvailable === null ? 'Connecting to scientific server.' : 'Scientific server unavailable. Retrying automatically.'}</strong> The cloud server may take a minute to wake after inactivity. Your model catalog remains available while it connects.</div>}
     {error && <div className="error-banner" role="alert">{error}<button onClick={() => setError('')} aria-label="Dismiss error">×</button></div>}
     {view === 'simulator' && config && <main className="workspace"><aside className="controls"><div className="panel-title"><p className="eyebrow">01 / SIMULATOR</p><h1>Configure a run</h1></div><button className="primary-button" onClick={runOne} disabled={busy || serverAvailable !== true || detail?.status !== 'enabled'}>{busy ? 'Running…' : serverAvailable === false ? 'Server offline' : 'Run simulation'} <span>→</span></button><ConfigEditor models={models} config={config} detail={detail} onChange={setConfig} /></aside>
       <section className="results"><div className="results-heading"><div><p className="eyebrow">ACTION POTENTIAL</p><h2>{result ? models.find(item => item.id === result.model_id)?.display_name : 'Trace preview'}</h2></div>{result && <div className="export-actions"><button onClick={() => download(`${result.model_id}.json`, JSON.stringify(result, null, 2), 'application/json')}>↓ JSON</button><button onClick={() => download(`${result.model_id}.csv`, resultCsv(result), 'text/csv')}>↓ CSV</button></div>}</div>
