@@ -12,7 +12,9 @@ const bundledModels = manifest.models as unknown as Model[]
 
 async function jsonRequest<T>(url: string, body?: unknown): Promise<T> {
   const response = await fetch(url, body === undefined ? undefined : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
-  const value = await response.json()
+  const text = await response.text()
+  let value
+  try { value = JSON.parse(text) } catch { throw new Error(`Scientific server returned HTTP ${response.status}. Please retry with a shorter duration or less warm-up.`) }
   if (!response.ok) throw new Error(typeof value.detail === 'string' ? value.detail : JSON.stringify(value.detail))
   return value as T
 }
@@ -22,7 +24,7 @@ function defaultConfig(model: Model): SimConfig {
     model_id: model.id,
     duration_ms: model.backend === 'grandits' ? 500 : model.category === 'pacemaker' ? 3000 : 1000,
     pacing: model.default_pacing,
-    prepace_beats: model.backend === 'grandits' || model.backend === 'external_compiled' || model.backend === 'herrera_octave' ? 0 : model.default_pacing.mode === 'spontaneous' ? 5 : 50,
+    prepace_beats: model.backend === 'grandits' || model.backend === 'external_compiled' || model.backend === 'herrera_octave' || model.backend === 'simone_static' ? 0 : model.default_pacing.mode === 'spontaneous' ? 5 : 50,
     parameters: {},
     model_options: { ...(model.default_options ?? {}) },
     include_currents: model.backend === 'grandits' ? [] : ['INa', 'IKr', 'ICaL'].filter(name => model.currents[name]),
@@ -88,7 +90,8 @@ function ConfigEditor({ models, config, detail, onChange, compact = false }: { m
     const model = models.find(item => item.id === id)
     if (model) onChange(defaultConfig(model))
   }
-  const mode = detail?.default_pacing.mode
+  detail = detail?.id === config.model_id ? detail : models.find(model => model.id === config.model_id) ?? null
+  const mode = config.pacing?.mode ?? detail?.default_pacing.mode
   return <div className="config-editor">
     <label className="field"><span>Model</span><ModelSelect models={models} value={config.model_id} onChange={selectModel} /></label>
     {detail && <div className="model-inline"><span>{detail.default_cell_type.replaceAll('_', ' ')}</span><span className="dot">•</span><span>{detail.backend}</span><span className="dot">•</span><span>{detail.source_revision.slice(0, 10)}</span></div>}
@@ -103,6 +106,7 @@ function ConfigEditor({ models, config, detail, onChange, compact = false }: { m
       </>}
       {mode === 'single_beat' && <p className="small-note">Single-beat surrogate. Pacing and ionic currents are unavailable.</p>}
       {mode === 'spontaneous' && <p className="small-note">Intrinsic rhythm without an external stimulus.</p>}
+      {detail?.backend === 'simone_static' && <p className="small-note">Starts from the published initial state with no warm-up by default. This short run is not a steady-state protocol. Adding warm-up increases computation time on the free server.</p>}
       {mode !== 'single_beat' && <NumberField label={mode === 'spontaneous' ? 'Warm-up seconds' : 'Prepace beats'} value={config.prepace_beats} min={0} max={100} unit={mode === 'spontaneous' ? 's' : undefined} onChange={prepace_beats => patch({ prepace_beats })} />}
     </div>
     {detail && detail.model_options && <div className="form-section"><h3>Model options</h3>
@@ -196,11 +200,12 @@ export default function App() {
   }, [])
   useEffect(() => {
     if (!config) return
-    if (serverAvailable === false) {
-      setDetail(models.find(item => item.id === config.model_id) ?? null)
-      return
-    }
-    if (serverAvailable === true) void jsonRequest<Model>(`${API}/models/${config.model_id}`).then(setDetail).catch(err => setError(err.message))
+    let cancelled = false
+    setDetail(models.find(item => item.id === config.model_id) ?? null)
+    if (serverAvailable === true) void jsonRequest<Model>(`${API}/models/${config.model_id}`)
+      .then(value => { if (!cancelled) setDetail(value) })
+      .catch(err => { if (!cancelled) setError(err.message) })
+    return () => { cancelled = true }
   }, [config?.model_id, serverAvailable, models])
   useEffect(() => { compareConfigs.forEach(item => {
     if (compareDetails[item.model_id]) return
