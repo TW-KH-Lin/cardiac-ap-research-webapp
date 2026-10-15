@@ -104,7 +104,11 @@ class HerreraBackend(SimulationBackend):
         try:
             completed = subprocess.run(
                 command, cwd=ROOT, env=environment, check=True, capture_output=True, text=True,
-                timeout=min(330.0, 30.0 + total_ms * 0.08),
+                # The free cloud instance is CPU-throttled; the original 110 s
+                # one-second-trace limit expired before ode15s completed.
+                # Bound each source-faithful run while covering the validated
+                # maximum simulated duration of five seconds.
+                timeout=600.0,
             )
             data = np.loadtxt(output_path, delimiter=",")
         except subprocess.TimeoutExpired as exc:
