@@ -16,10 +16,10 @@ RUN pip install --no-cache-dir torch==2.14.1 --index-url https://download.pytorc
     && pip install --no-cache-dir -r backend/requirements.txt
 # Myokit compiles model-specific C extensions on the first simulation. Its
 # default file-descriptor capture conflicts with Uvicorn's threaded request
-# logging in container runtimes; disable capture so compiler output is not
-# redirected through a closed request stream.
+# logging in container runtimes; keep compiler diagnostics but avoid its
+# low-level file-descriptor capture mode.
 RUN mkdir -p /root/.config/myokit \
-    && printf '[compatibility]\nno_capture = True\nno_fd_capture = True\n' > /root/.config/myokit/myokit.ini
+    && printf '[compatibility]\nno_fd_capture = True\n' > /root/.config/myokit/myokit.ini
 COPY backend/app backend/app
 COPY --from=frontend /app/frontend/dist frontend/dist
 COPY backend/native backend/native
