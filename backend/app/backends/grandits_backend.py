@@ -6,7 +6,6 @@ import sys
 from functools import lru_cache
 
 import numpy as np
-import torch
 
 from app.backends.base import SimulationBackend
 from app.core.metrics import paced_metrics
@@ -16,6 +15,8 @@ from app.core.schemas import SimulationRequest
 
 @lru_cache(maxsize=1)
 def load_emulator():
+    import torch
+
     from app.core.registry import model_by_id
 
     entry = model_by_id("grandits_2024")

@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import numpy as np
-import torch
 
 from app.backends.grandits_backend import load_emulator
 from app.core.schemas import FittingRequest
@@ -29,6 +28,8 @@ def _fit_one(
     reference: np.ndarray | None = None,
     change_limits: dict[str, float] | None = None,
 ) -> tuple[np.ndarray, np.ndarray, float, float]:
+    import torch
+
     names = list(emulator.max_conds_names)
     lower = np.asarray(emulator.max_conds_ranges[0], dtype=np.float32)
     upper = np.asarray(emulator.max_conds_ranges[1], dtype=np.float32)
@@ -83,6 +84,8 @@ def _fit_one(
 
 
 def fit_csv(request: FittingRequest) -> dict:
+    import torch
+
     torch.manual_seed(request.seed)
     emulator = load_emulator()
     names = [str(name) for name in emulator.max_conds_names]
