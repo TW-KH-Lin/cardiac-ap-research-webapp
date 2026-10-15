@@ -20,6 +20,9 @@ RUN pip install --no-cache-dir torch==2.14.1 --index-url https://download.pytorc
 # low-level file-descriptor capture mode.
 RUN mkdir -p /root/.config/myokit \
     && printf '[compatibility]\nno_fd_capture = True\n' > /root/.config/myokit/myokit.ini
+# Keep first-run Myokit model compilation within the memory available on the
+# free web-service instance. The equations and solver tolerances are unchanged.
+ENV CFLAGS="-O0"
 COPY backend/app backend/app
 COPY --from=frontend /app/frontend/dist frontend/dist
 COPY backend/native backend/native
