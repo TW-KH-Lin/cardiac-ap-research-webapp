@@ -10,10 +10,20 @@ RUN pnpm build
 FROM python:3.12-slim AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONPATH=/app/backend
 WORKDIR /app
-RUN apt-get update && apt-get install -y --no-install-recommends build-essential ca-certificates curl git libsundials-dev mpi-default-dev octave && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential ca-certificates curl git libsundials-dev mpi-default-dev && rm -rf /var/lib/apt/lists/*
 COPY backend/requirements.txt backend/requirements.txt
 RUN pip install --no-cache-dir torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu \
     && pip install --no-cache-dir -r backend/requirements.txt
+# Debian Trixie's Octave is built without working ode15s/SUNDIALS support.
+# Use the same pinned conda-forge Octave release as the validated research
+# runtime, and verify its stiff solver during image build.
+RUN mkdir -p /app/.runtime/bin \
+    && curl -fsSL https://github.com/mamba-org/micromamba-releases/releases/download/2.9.0-0/micromamba-linux-64 -o /app/.runtime/bin/micromamba \
+    && echo '366cd9cd8be14df1ab8ed50352a82111082a36686b2d389fdb79a92c3fafb3e3  /app/.runtime/bin/micromamba' | sha256sum -c - \
+    && chmod +x /app/.runtime/bin/micromamba \
+    && /app/.runtime/bin/micromamba create --yes --root-prefix /app/.runtime/mamba --name octave --channel conda-forge --strict-channel-priority octave=10.3.0 \
+    && /app/.runtime/bin/micromamba run --root-prefix /app/.runtime/mamba --name octave octave-cli --quiet --eval "[t,y]=ode15s(@(t,y)-y,[0 1],1); assert(abs(y(end)-exp(-1))<1e-3)" \
+    && rm -rf /app/.runtime/mamba/pkgs
 # Myokit compiles model-specific C extensions on the first simulation. Its
 # default file-descriptor capture conflicts with Uvicorn's threaded request
 # logging in container runtimes; keep compiler diagnostics but avoid its

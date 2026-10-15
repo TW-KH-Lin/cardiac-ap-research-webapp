@@ -82,13 +82,13 @@ Open `http://127.0.0.1:8000`.
 
 ## Docker
 
-The Docker build fetches every model from its pinned upstream revision and compiles the Ni adapter. The running container does not download models:
+The Docker build fetches every model from its pinned upstream revision, compiles the Ni adapter, and installs the pinned Octave 10.3.0 conda-forge runtime used by Herrera. The running container does not download model sources:
 
 ```bash
 docker compose up --build
 ```
 
-The image compiles the Ni adapter inside Linux, avoiding reuse of a host binary, and installs Octave for the four Herrera variants.
+The image compiles the Ni adapter inside Linux, verifies Octave's `ode15s` solver during the build, and installs Octave for the four Herrera variants.
 
 ## Persistent cloud deployment
 
