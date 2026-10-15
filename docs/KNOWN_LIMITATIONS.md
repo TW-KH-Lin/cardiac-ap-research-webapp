@@ -20,6 +20,7 @@
 
 - First Myokit use compiles native simulation code and may be slower than later runs.
 - Herrera requires GNU Octave with SUNDIALS `ode15s` support. The production image installs the pinned Octave 10.3.0 conda-forge runtime under `.runtime/mamba` and checks the stiff solver during the build; its original-source simulations take roughly 45 seconds per one-second trace on the development host.
+- The published Render Free instance is limited to 0.15 CPU. A one-second Herrera male/nSR run exceeded the 600-second server timeout there; all four Herrera variants use the same source solver and are not practically usable on this tier. The other ten catalog entries passed live finite-trace smoke runs. Herrera needs a higher-CPU runtime or a separately validated optimized source port.
 - Browser plots use returned arrays directly. Scientific metrics are computed before presentation.
 
 ## Deployment
